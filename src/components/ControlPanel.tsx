@@ -1,11 +1,7 @@
 import React from "react";
 import Slider from "./Slider";
 import useControlsInternal from "@/hooks/useControlsInternal";
-import type { Control } from "@/contexts/ControlsContext";
-
-const isSettingType = (v: unknown): v is Control<any> => {
-  return typeof v === "object" && v !== null && "value" in v;
-};
+import { isControlType } from "@/utils";
 
 const SettingsControlDialog = () => {
   const { setSettings, settings } = useControlsInternal();
@@ -21,12 +17,12 @@ const SettingsControlDialog = () => {
       <div className="flex flex-col">
         {Object.entries(settings).map(([k, v], i) => (
           <div key={i} className="flex gap-2">
-            <span>{isSettingType(v) ? v.label : k}</span>
+            <span>{isControlType(v) ? v.label : k}</span>
             <Slider
-              value={isSettingType(v) ? v.value : v}
+              value={isControlType(v) ? v.value : v}
               onChange={(v) => onValueChange(k, v)}
             />
-            <span className="w-8">{isSettingType(v) ? v.value : v}</span>
+            <span className="w-8">{isControlType(v) ? v.value : v}</span>
           </div>
         ))}
       </div>
