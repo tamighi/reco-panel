@@ -1,7 +1,7 @@
 import { type Control, type Controls } from "@/contexts/ControlsContext";
+import { isControlType } from "@/utils";
 import React from "react";
 import useControlsInternal from "./useControlsInternal";
-import { isControlType } from "@/utils";
 
 type UseControlsReturn<T extends Controls> = {
   [K in keyof T]: T[K] extends Control<any> ? T[K]["value"] : T[K];

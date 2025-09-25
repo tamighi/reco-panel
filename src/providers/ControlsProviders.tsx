@@ -1,4 +1,4 @@
-import SettingsControlDialog from "@/components/ControlPanel";
+import ControlPanel from "@/components/ControlPanel";
 import ControlsContext, { type Controls } from "@/contexts/ControlsContext";
 import React from "react";
 
@@ -7,7 +7,7 @@ const ControlsProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ControlsContext value={{ settings, setSettings }}>
-      <SettingsControlDialog />
+      <ControlPanel />
       {children}
     </ControlsContext>
   );

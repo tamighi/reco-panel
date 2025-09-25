@@ -3,13 +3,19 @@ import Slider from "./Slider";
 import useControlsInternal from "@/hooks/useControlsInternal";
 import { isControlType } from "@/utils";
 
-const SettingsControlDialog = () => {
+const ControlPanel = () => {
   const { setSettings, settings } = useControlsInternal();
 
   const onValueChange = React.useCallback(
-    (key: string, value: number) =>
-      setSettings((obj) => ({ ...obj, [key]: value })),
-    [],
+    (key: string, value: number) => {
+      setSettings((obj) => ({
+        ...obj,
+        [key]: isControlType(settings[key])
+          ? { ...settings[key], value }
+          : value,
+      }));
+    },
+    [settings],
   );
 
   return (
@@ -30,4 +36,4 @@ const SettingsControlDialog = () => {
   );
 };
 
-export default SettingsControlDialog;
+export default ControlPanel;
