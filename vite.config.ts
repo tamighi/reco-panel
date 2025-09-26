@@ -7,7 +7,7 @@ import dts from "vite-plugin-dts";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), libInjectCss(), tailwindcss(), dts()],
+  plugins: [react(), libInjectCss(), tailwindcss(), dts({ rollupTypes: true })],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

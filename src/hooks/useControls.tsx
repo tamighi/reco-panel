@@ -1,13 +1,18 @@
-import { type Control, type Controls } from "@/contexts/ControlsContext";
+import {
+  type ControlOption,
+  type ControlsRecord,
+} from "@/contexts/ControlsContext";
 import { isControlType } from "@/utils";
 import React from "react";
 import useControlsInternal from "./useControlsInternal";
 
-type UseControlsReturn<T extends Controls> = {
-  [K in keyof T]: T[K] extends Control<any> ? T[K]["value"] : T[K];
+type UseControlsReturn<T extends ControlsRecord> = {
+  [K in keyof T]: T[K] extends ControlOption<any> ? T[K]["value"] : T[K];
 };
 
-const useControls = <T extends Controls>(values: T): UseControlsReturn<T> => {
+const useControls = <T extends ControlsRecord>(
+  values: T,
+): UseControlsReturn<T> => {
   const { settings, setSettings } = useControlsInternal();
 
   React.useEffect(() => {

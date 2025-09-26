@@ -1,17 +1,19 @@
 import React from "react";
 
-export type ControlType = number;
+export type ControlPrimitive = number | boolean;
 
-export type Control<T extends ControlType> = {
+export type ControlOption<T extends ControlPrimitive> = {
   value: T;
   label?: string;
 };
 
-export type Controls = { [K: string]: ControlType | Control<ControlType> };
+export type ControlValue = ControlPrimitive | ControlOption<ControlPrimitive>;
+
+export type ControlsRecord = { [K: string]: ControlValue };
 
 export type ControlsContextType = {
-  settings: Controls;
-  setSettings: React.Dispatch<React.SetStateAction<Controls>>;
+  settings: ControlsRecord;
+  setSettings: React.Dispatch<React.SetStateAction<ControlsRecord>>;
 };
 
 const ControlsContext = React.createContext<ControlsContextType | null>(null);

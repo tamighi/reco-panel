@@ -1,5 +1,5 @@
-import type { Control } from "@/contexts/ControlsContext";
+import type { ControlOption } from "@/contexts/ControlsContext";
 
-export const isControlType = (v: unknown): v is Control<any> => {
+export const isControlType = (v: unknown): v is ControlOption<any> => {
   return typeof v === "object" && v !== null && "value" in v;
 };
