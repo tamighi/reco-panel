@@ -11,12 +11,12 @@ type UseControlsReturn<T extends ControlsRecord> = {
 };
 
 const useControls = <T extends ControlsRecord>(
-  values: T,
+  controls: T,
 ): UseControlsReturn<T> => {
   const { settings, setSettings } = useControlsInternal();
 
   React.useEffect(() => {
-    setSettings((old) => ({ ...values, ...old }));
+    setSettings((old) => ({ ...controls, ...old }));
   }, []);
 
   const onlyValSettings = React.useMemo(
