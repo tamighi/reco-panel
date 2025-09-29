@@ -64,7 +64,7 @@ const useControls = <T extends ControlInputRecords>(
   const normalizedControlInputs = React.useMemo(() => {
     const controls = normalizeControls(controlInputs);
     return store ? loadControlsFromStorage(controls) : controls;
-  }, [controlInputs]);
+  }, []);
 
   const { settings, setSettings } = useControlsInternal();
 
