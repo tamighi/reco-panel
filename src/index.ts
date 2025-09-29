@@ -1,3 +1,4 @@
 import "./index.css";
-export { ControlsProviders } from "./providers";
-export { useControls, useStorageControls } from "./hooks";
+
+export * from "./hooks";
+export * from "./providers";

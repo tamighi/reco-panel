@@ -1,7 +1,6 @@
 import ControlsContext, {
   type ControlPrimitive,
 } from "@/contexts/ControlsContext";
-import { isControlType } from "@/utils";
 import React from "react";
 
 const useControlsInternal = () => {
@@ -16,9 +15,7 @@ const useControlsInternal = () => {
     (key: string, value: ControlPrimitive) => {
       setSettings((obj) => ({
         ...obj,
-        [key]: isControlType(settings[key])
-          ? { ...settings[key], value }
-          : value,
+        [key]: { ...settings[key], value },
       }));
     },
     [settings, setSettings],

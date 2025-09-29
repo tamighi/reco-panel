@@ -2,14 +2,12 @@ import React from "react";
 
 export type ControlPrimitive = number | boolean;
 
-export type ControlOption<T extends ControlPrimitive> = {
+export type ControlOption<T extends ControlPrimitive = ControlPrimitive> = {
   value: T;
   label?: string;
 };
 
-export type ControlValue = ControlPrimitive | ControlOption<ControlPrimitive>;
-
-export type ControlsRecord = { [K: string]: ControlValue };
+export type ControlsRecord = { [K: string]: ControlOption<ControlPrimitive> };
 
 export type ControlsContextType = {
   settings: ControlsRecord;
