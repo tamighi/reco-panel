@@ -1,11 +1,11 @@
 import type { ControlOption } from "@/contexts/ControlsContext";
 import useControlsInternal from "@/hooks/useControlsInternal";
 import { Checkbox } from "@mui/material";
-import Slider from "./Slider";
+import NumberControl from "./NumberControl";
 
 type Props = {
-  control: ControlOption;
   controlKey: string;
+  control: ControlOption;
 };
 
 const Control = ({ controlKey, control }: Props) => {
@@ -14,10 +14,11 @@ const Control = ({ controlKey, control }: Props) => {
   return (
     <div className="flex gap-2 items-center">
       <span>{control.label}</span>
+
       {typeof control.value === "number" ? (
-        <Slider
-          value={control.value}
+        <NumberControl
           onChange={(v) => setControlValue(controlKey, v)}
+          control={control as ControlOption<number>}
         />
       ) : typeof control.value === "boolean" ? (
         <Checkbox
@@ -26,7 +27,6 @@ const Control = ({ controlKey, control }: Props) => {
           onChange={(v) => setControlValue(controlKey, v.target.checked)}
         />
       ) : null}
-      <span className="w-8">{control.value}</span>
     </div>
   );
 };

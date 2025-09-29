@@ -1,30 +1,22 @@
 import { Slider as MuiSlider } from "@mui/material";
-import React from "react";
-
-const getSliderParameters = (startValue: number) => {
-  const min = startValue - Math.abs(startValue);
-  const max = startValue + Math.abs(startValue);
-  const step = Math.abs(startValue / 5);
-
-  return { min, max, step };
-};
 
 export type SliderProps = {
   value: number;
   onChange?: (v: number) => void;
+  min?: number;
+  max?: number;
+  step?: number;
 };
 
-const Slider = ({ value, onChange }: SliderProps) => {
-  const options = React.useMemo(() => getSliderParameters(value), []);
-
+const Slider = ({ min, max, step, value, onChange }: SliderProps) => {
   return (
     <div className="w-24">
       <MuiSlider
         marks
         value={value}
-        min={options.min}
-        max={options.max}
-        step={options.step}
+        min={min}
+        max={max}
+        step={step}
         onChange={(e) => onChange?.((e.target as any).value)}
       />
     </div>
@@ -32,4 +24,3 @@ const Slider = ({ value, onChange }: SliderProps) => {
 };
 
 export default Slider;
-
