@@ -1,4 +1,4 @@
-import Slider from "../Slider";
+import Slider from "../Inputs/Slider";
 import type { ControlProps } from "./types";
 
 type Props = ControlProps<number>;

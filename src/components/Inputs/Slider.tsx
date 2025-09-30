@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React from "react";
 
 export type SliderProps = {
     value: number;
@@ -15,12 +15,12 @@ const Slider: React.FC<SliderProps> = ({
     max = 100,
     step,
 }) => {
-    const [isDragging, setIsDragging] = useState(false);
-    const sliderRef = useRef<HTMLDivElement>(null);
+    const [isDragging, setIsDragging] = React.useState(false);
+    const sliderRef = React.useRef<HTMLDivElement>(null);
 
     const percentage = ((value - min) / (max - min)) * 100;
 
-    const updateValue = useCallback((clientX: number) => {
+    const updateValue = React.useCallback((clientX: number) => {
         if (!sliderRef.current || !onChange) return;
 
         const rect = sliderRef.current.getBoundingClientRect();
@@ -36,12 +36,12 @@ const Slider: React.FC<SliderProps> = ({
         onChange(clampedValue);
     }, []);
 
-    const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
         setIsDragging(true);
         updateValue(e.clientX);
     }, []);
 
-    const handleMouseMove = useCallback(
+    const handleMouseMove = React.useCallback(
         (e: MouseEvent) => {
             if (isDragging) {
                 updateValue(e.clientX);
@@ -50,7 +50,7 @@ const Slider: React.FC<SliderProps> = ({
         [isDragging],
     );
 
-    const handleMouseUp = useCallback(() => {
+    const handleMouseUp = React.useCallback(() => {
         setIsDragging(false);
     }, []);
 

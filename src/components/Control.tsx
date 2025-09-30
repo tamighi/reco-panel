@@ -8,6 +8,17 @@ import NumberControl from "./Controls/NumberControl";
 import type { ControlProps } from "./Controls/types";
 import React from "react";
 
+const CONTROL_REGISTRY = [
+    {
+        guard: (v: ControlPrimitive) => typeof v === "number",
+        component: NumberControl,
+    },
+    {
+        guard: (v: ControlPrimitive) => typeof v === "boolean",
+        component: BooleanControl,
+    },
+] as const;
+
 type Props<T extends ControlPrimitive> = {
     controlKey: string;
     control: ControlOption<T>;
@@ -17,19 +28,12 @@ type ControlComponent<T extends ControlPrimitive> = React.ComponentType<
     ControlProps<T>
 >;
 
-const CONTROL_REGISTRY = {
-    number: NumberControl,
-    boolean: BooleanControl,
-} as const;
-
 const getControlComponent = <T extends ControlPrimitive>(
     value: T,
 ): ControlComponent<T> => {
-    if (typeof value === "number")
-        return CONTROL_REGISTRY["number"] as ControlComponent<T>;
-    if (typeof value === "boolean")
-        return CONTROL_REGISTRY["boolean"] as ControlComponent<T>;
-    throw new Error(`Unsupported control type`);
+    const control = CONTROL_REGISTRY.find((reg) => reg.guard(value));
+    if (!control) throw new Error(`Unsupported control type`);
+    return control.component as ControlComponent<T>;
 };
 
 const Control = <T extends ControlPrimitive>({

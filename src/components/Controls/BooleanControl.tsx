@@ -1,4 +1,4 @@
-import Checkbox from "../Checkbox";
+import Checkbox from "../Inputs/Checkbox";
 import type { ControlProps } from "./types";
 
 type Props = ControlProps<boolean>;
