@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme {
+  --color-elevation-1: #292d39;
+  --color-elevation-2: #181c20;
+  --color-elevation-3: #373c4b;
+
+  --color-highlight-1: #dce0e4;
+
+  --color-primary: #66d4bb;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

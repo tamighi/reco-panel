@@ -69,17 +69,17 @@ const Slider: React.FC<SliderProps> = ({
         <div className="w-full h-5 flex items-center">
             <div
                 ref={sliderRef}
-                className="relative w-full h-1 bg-gray-700 rounded-full
+                className="relative w-full h-1 bg-elevation-3 rounded-full
                     cursor-pointer"
                 onMouseDown={handleMouseDown}
             >
                 <div
-                    className="absolute h-full bg-blue-500 rounded-full"
+                    className="absolute h-full bg-primary rounded-full"
                     style={{ width: `${percentage}%` }}
                 />
                 <div
                     className="absolute top-1/2 -translate-y-1/2 w-3 h-3
-                        bg-blue-500 rounded-full cursor-grab
+                        bg-primary rounded-full cursor-grab
                         active:cursor-grabbing"
                     style={{ left: `${percentage}%` }}
                 />

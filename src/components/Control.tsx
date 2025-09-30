@@ -3,10 +3,10 @@ import type {
     ControlPrimitive,
 } from "@/contexts/ControlsContext";
 import useControlsInternal from "@/hooks/useControlsInternal";
+import React from "react";
 import BooleanControl from "./Controls/BooleanControl";
 import NumberControl from "./Controls/NumberControl";
 import type { ControlProps } from "./Controls/types";
-import React from "react";
 
 const CONTROL_REGISTRY = [
     {
@@ -49,7 +49,7 @@ const Control = <T extends ControlPrimitive>({
 
     return (
         <div className="flex gap-2 items-center">
-            <span>{control.label}</span>
+            <span className="text-highlight-1">{control.label}</span>
             <ControlComponent
                 control={control}
                 onChange={(v) => setControlValue(controlKey, v)}

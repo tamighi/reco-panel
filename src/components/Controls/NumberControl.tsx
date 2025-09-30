@@ -1,3 +1,4 @@
+import Input from "../Inputs/Input";
 import Slider from "../Inputs/Slider";
 import type { ControlProps } from "./types";
 
@@ -9,7 +10,7 @@ const NumberControl = ({ control, onChange }: Props) => {
             {control.min !== undefined && control.max !== undefined ? (
                 <Slider onChange={onChange} {...control} />
             ) : (
-                <input
+                <Input
                     type="number"
                     onChange={(e) => onChange?.(Number(e.target.value))}
                     {...control}
