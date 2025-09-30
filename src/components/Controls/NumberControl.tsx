@@ -1,10 +1,7 @@
-import type { ControlOption } from "@/contexts/ControlsContext";
-import Slider from "./Slider";
+import Slider from "../Slider";
+import type { ControlProps } from "./types";
 
-type Props = {
-    control: ControlOption<number>;
-    onChange?: (v: number) => void;
-};
+type Props = ControlProps<number>;
 
 const NumberControl = ({ control, onChange }: Props) => {
     return (

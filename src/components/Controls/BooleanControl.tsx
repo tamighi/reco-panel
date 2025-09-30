@@ -1,10 +1,7 @@
-import type { ControlOption } from "@/contexts/ControlsContext";
-import Checkbox from "./Checkbox";
+import Checkbox from "../Checkbox";
+import type { ControlProps } from "./types";
 
-type Props = {
-    control: ControlOption<boolean>;
-    onChange?: (v: boolean) => void;
-};
+type Props = ControlProps<boolean>;
 
 const BooleanControl = ({ control, onChange }: Props) => {
     return (
