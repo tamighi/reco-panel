@@ -1,26 +1,91 @@
-import { Slider as MuiSlider } from "@mui/material";
+import React, { useState, useRef, useCallback } from "react";
 
 export type SliderProps = {
-  value: number;
-  onChange?: (v: number) => void;
-  min?: number;
-  max?: number;
-  step?: number;
+    value: number;
+    onChange?: (v: number) => void;
+    min?: number;
+    max?: number;
+    step?: number;
 };
 
-const Slider = ({ min, max, step, value, onChange }: SliderProps) => {
-  return (
-    <div className="w-24">
-      <MuiSlider
-        marks
-        value={value}
-        min={min}
-        max={max}
-        step={step}
-        onChange={(e) => onChange?.((e.target as any).value)}
-      />
-    </div>
-  );
+const Slider: React.FC<SliderProps> = ({
+    value,
+    onChange,
+    min = 0,
+    max = 100,
+    step,
+}) => {
+    const [isDragging, setIsDragging] = useState(false);
+    const sliderRef = useRef<HTMLDivElement>(null);
+
+    const percentage = ((value - min) / (max - min)) * 100;
+
+    const updateValue = useCallback((clientX: number) => {
+        if (!sliderRef.current || !onChange) return;
+
+        const rect = sliderRef.current.getBoundingClientRect();
+        const ratio = Math.max(
+            0,
+            Math.min(1, (clientX - rect.left) / rect.width),
+        );
+        const rawValue = min + ratio * (max - min);
+        const finalValue =
+            step !== undefined ? Math.round(rawValue / step) * step : rawValue;
+        const clampedValue = Math.max(min, Math.min(max, finalValue));
+
+        onChange(clampedValue);
+    }, []);
+
+    const handleMouseDown = useCallback((e: React.MouseEvent) => {
+        setIsDragging(true);
+        updateValue(e.clientX);
+    }, []);
+
+    const handleMouseMove = useCallback(
+        (e: MouseEvent) => {
+            if (isDragging) {
+                updateValue(e.clientX);
+            }
+        },
+        [isDragging],
+    );
+
+    const handleMouseUp = useCallback(() => {
+        setIsDragging(false);
+    }, []);
+
+    React.useEffect(() => {
+        if (isDragging) {
+            document.addEventListener("mousemove", handleMouseMove);
+            document.addEventListener("mouseup", handleMouseUp);
+            return () => {
+                document.removeEventListener("mousemove", handleMouseMove);
+                document.removeEventListener("mouseup", handleMouseUp);
+            };
+        }
+    }, [isDragging]);
+
+    return (
+        <div className="w-full h-5 flex items-center">
+            <div
+                ref={sliderRef}
+                className="relative w-full h-1 bg-gray-700 rounded-full
+                    cursor-pointer"
+                onMouseDown={handleMouseDown}
+            >
+                <div
+                    className="absolute h-full bg-blue-500 rounded-full"
+                    style={{ width: `${percentage}%` }}
+                />
+                <div
+                    className="absolute top-1/2 -translate-y-1/2 w-3 h-3
+                        bg-blue-500 rounded-full cursor-grab
+                        active:cursor-grabbing"
+                    style={{ left: `${percentage}%` }}
+                />
+            </div>
+        </div>
+    );
 };
 
 export default Slider;

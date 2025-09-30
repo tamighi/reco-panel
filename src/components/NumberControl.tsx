@@ -2,25 +2,24 @@ import type { ControlOption } from "@/contexts/ControlsContext";
 import Slider from "./Slider";
 
 type Props = {
-  control: ControlOption<number>;
-  onChange?: (v: number) => void;
+    control: ControlOption<number>;
+    onChange?: (v: number) => void;
 };
 
 const NumberControl = ({ control, onChange }: Props) => {
-  return (
-    <>
-      {control.min && control.max ? (
-        <Slider value={control.value} onChange={(v) => onChange?.(v)} />
-      ) : (
-        <input
-          type="number"
-          value={control.value}
-          step="0.01"
-          onChange={(e) => onChange?.(Number(e.target.value))}
-        />
-      )}
-    </>
-  );
+    return (
+        <>
+            {control.min !== undefined && control.max !== undefined ? (
+                <Slider onChange={(v) => onChange?.(v)} {...control} />
+            ) : (
+                <input
+                    type="number"
+                    onChange={(e) => onChange?.(Number(e.target.value))}
+                    {...control}
+                />
+            )}
+        </>
+    );
 };
 
 export default NumberControl;
