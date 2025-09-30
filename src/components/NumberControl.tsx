@@ -10,7 +10,7 @@ const NumberControl = ({ control, onChange }: Props) => {
     return (
         <>
             {control.min !== undefined && control.max !== undefined ? (
-                <Slider onChange={(v) => onChange?.(v)} {...control} />
+                <Slider onChange={onChange} {...control} />
             ) : (
                 <input
                     type="number"
