@@ -17,8 +17,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
     return (
         <div
-            className={`w-5 h-5 rounded border-2 flex items-center
-                justify-center ${checked ? "bg-primary" : "bg-elevation-3"}
+            className={`w-input h-input rounded flex items-center justify-center
+                border border-transparent focus:border-primary
+                hover:border-primary
+                ${checked ? "bg-primary" : "bg-elevation-3"}
                 ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
             onClick={handleChange}
         >

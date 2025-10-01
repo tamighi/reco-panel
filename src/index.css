@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  /* Colors */
   --color-elevation-1: #292d39;
   --color-elevation-2: #181c20;
   --color-elevation-3: #373c4b;
@@ -8,6 +9,12 @@
   --color-highlight-1: #dce0e4;
 
   --color-primary: #66d4bb;
+
+  /* Sizes */
+  --spacing-input: 24px;
+  --spacing-row: 32px;
+  --spacing-rootWidth: 280px;
+  --text-root: 12px;
 }
 
 input[type="number"] {

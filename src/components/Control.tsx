@@ -48,8 +48,10 @@ const Control = <T extends ControlPrimitive>({
     );
 
     return (
-        <div className="flex gap-2 items-center">
-            <span className="text-highlight-1">{control.label}</span>
+        <div
+            className="grid grid-cols-[auto_160px] h-row p-1 gap-2 items-center"
+        >
+            <span className="text-highlight-1 truncate">{control.label}</span>
             <ControlComponent
                 control={control}
                 onChange={(v) => setControlValue(controlKey, v)}
