@@ -5,6 +5,8 @@ import DragIcon from "./DragIcon";
 import React from "react";
 
 const ControlPanel = () => {
+    const { settings } = useControlsInternal();
+
     const [isDragging, setIsDragging] = React.useState(false);
 
     const panelRef = React.useRef<HTMLDivElement>(null);
@@ -14,7 +16,6 @@ const ControlPanel = () => {
         onDragStart: () => setIsDragging(true),
         onDragEnd: () => setIsDragging(false),
     });
-    const { settings } = useControlsInternal();
 
     return (
         <div

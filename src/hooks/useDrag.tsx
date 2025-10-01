@@ -30,7 +30,7 @@ export const useDrag = ({
 
     const handleMouseMove = React.useCallback(
         (e: MouseEvent) => {
-            if (!isDragging || !elementRef.current) return;
+            if (!isDragging) return;
 
             const deltaX = e.clientX - startMouse.x;
             const deltaY = e.clientY - startMouse.y;
@@ -40,13 +40,11 @@ export const useDrag = ({
 
             onDrag?.({ x: newX, y: newY });
         },
-        [isDragging, elementRef, lastPosition],
+        [isDragging, lastPosition, startMouse],
     );
 
     const handleMouseUp = React.useCallback(
         (e: MouseEvent) => {
-            if (!isDragging) return;
-
             const deltaX = e.clientX - startMouse.x;
             const deltaY = e.clientY - startMouse.y;
 
@@ -58,7 +56,7 @@ export const useDrag = ({
             setIsDragging(false);
             onDragEnd?.();
         },
-        [isDragging, lastPosition],
+        [lastPosition, startMouse],
     );
 
     React.useEffect(() => {

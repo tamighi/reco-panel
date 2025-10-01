@@ -66,12 +66,13 @@ const Slider: React.FC<SliderProps> = ({
     }, [isDragging]);
 
     return (
-        <div className="w-full h-5 flex items-center">
+        <div
+            onMouseDown={handleMouseDown}
+            className="cursor-pointer w-full h-5 flex items-center"
+        >
             <div
                 ref={sliderRef}
-                className="relative w-full h-1 bg-elevation-3 rounded-full
-                    cursor-pointer"
-                onMouseDown={handleMouseDown}
+                className="relative w-full h-1 bg-elevation-3 rounded-full"
             >
                 <div
                     className="absolute h-full bg-primary rounded-full"
