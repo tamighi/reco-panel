@@ -45,6 +45,8 @@ export const useDrag = ({
 
     const handleMouseUp = React.useCallback(
         (e: MouseEvent) => {
+            if (!isDragging) return;
+
             const deltaX = e.clientX - startMouse.x;
             const deltaY = e.clientY - startMouse.y;
 

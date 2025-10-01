@@ -8,12 +8,15 @@ type Props = ControlProps<number>;
 const NumberControl = ({ control, onChange }: Props) => {
     const [value, setValue] = React.useState(control.value);
 
+    React.useEffect(() => {
+        setValue(control.value);
+    }, [control]);
+
     const onInputChange = (v: number) => {
         if (control.max) v = Math.min(v, control.max);
         if (control.min) v = Math.max(v, control.min);
 
         onChange?.(v);
-        setValue(v);
     };
 
     const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -34,10 +37,10 @@ const NumberControl = ({ control, onChange }: Props) => {
                 className="flex-1"
                 type="number"
                 onBlur={(e) => onInputChange(Number(e.target.value))}
-                {...control}
                 onChange={(e) => setValue(Number(e.target.value))}
-                value={value}
                 onKeyDown={handleEnterPress}
+                {...control}
+                value={value}
             />
         </div>
     );
