@@ -5,7 +5,7 @@ import DragIcon from "./DragIcon";
 import React from "react";
 
 const ControlPanel = () => {
-    const { settings } = useControlsInternal();
+    const { controls } = useControlsInternal();
 
     const [isDragging, setIsDragging] = React.useState(false);
 
@@ -33,7 +33,7 @@ const ControlPanel = () => {
                 </div>
 
                 <div className="flex flex-col p-2 bg-elevation-2 rounded-sm">
-                    {Object.entries(settings).map(([key, control]) => (
+                    {Object.entries(controls).map(([key, control]) => (
                         <Control key={key} controlKey={key} control={control} />
                     ))}
                 </div>

@@ -4,24 +4,24 @@ import ControlsContext, {
 import React from "react";
 
 const useControlsInternal = () => {
-    const settingsContext = React.useContext(ControlsContext);
-    if (!settingsContext) {
+    const controlsContext = React.useContext(ControlsContext);
+    if (!controlsContext) {
         throw new Error("useControls must be used within a ControlsProvider");
     }
 
-    const { setSettings, settings } = settingsContext;
+    const { controls, setControls } = controlsContext;
 
     const setControlValue = React.useCallback(
         (key: string, value: ControlPrimitive) => {
-            setSettings((obj) => ({
-                ...obj,
-                [key]: { ...settings[key], value },
-            }));
+            setControls((obj) => {
+                obj[key].value = value;
+                return obj;
+            });
         },
-        [settings, setSettings],
+        [controls, setControls],
     );
 
-    return { setSettings, settings, setControlValue };
+    return { setControls, controls, setControlValue };
 };
 
 export default useControlsInternal;

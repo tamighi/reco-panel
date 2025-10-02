@@ -5,10 +5,10 @@ import ControlsContext, {
 import React from "react";
 
 const ControlsProvider = ({ children }: { children: React.ReactNode }) => {
-    const [settings, setSettings] = React.useState<ControlsRecord>({});
+    const [controls, setControls] = React.useState<ControlsRecord>({});
 
     return (
-        <ControlsContext value={{ settings, setSettings }}>
+        <ControlsContext value={{ controls, setControls }}>
             <ControlPanel />
             {children}
         </ControlsContext>

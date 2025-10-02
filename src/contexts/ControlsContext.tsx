@@ -19,8 +19,8 @@ export type ControlOption<T extends ControlPrimitive = ControlPrimitive> =
 export type ControlsRecord = { [K: string]: ControlOption<ControlPrimitive> };
 
 export type ControlsContextType = {
-    settings: ControlsRecord;
-    setSettings: React.Dispatch<React.SetStateAction<ControlsRecord>>;
+    controls: ControlsRecord;
+    setControls: React.Dispatch<React.SetStateAction<ControlsRecord>>;
 };
 
 const ControlsContext = React.createContext<ControlsContextType | null>(null);

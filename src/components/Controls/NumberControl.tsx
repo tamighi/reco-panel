@@ -17,6 +17,7 @@ const NumberControl = ({ control, onChange }: Props) => {
         if (control.min) v = Math.max(v, control.min);
 
         onChange?.(v);
+        setValue(v);
     };
 
     const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {

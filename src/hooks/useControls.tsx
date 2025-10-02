@@ -66,20 +66,20 @@ const useControls = <T extends ControlInputRecords>(
         return store ? loadControlsFromStorage(controls) : controls;
     }, []);
 
-    const { settings, setSettings } = useControlsInternal();
+    const { controls, setControls } = useControlsInternal();
 
     React.useEffect(() => {
-        setSettings((old) => ({ ...normalizedControlInputs, ...old }));
+        setControls((old) => ({ ...normalizedControlInputs, ...old }));
     }, [normalizedControlInputs]);
 
     const settingValues = React.useMemo(() => {
-        return Object.keys(settings).reduce((acc, key) => {
+        return Object.keys(controls).reduce((acc, key) => {
             if (controlInputs[key]) {
-                (acc as any)[key] = settings[key].value;
+                (acc as any)[key] = controls[key].value;
             }
             return acc;
         }, {} as UseControlsReturn<T>);
-    }, [settings]);
+    }, [controls]);
 
     React.useEffect(() => {
         if (store) {
