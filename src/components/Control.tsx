@@ -6,6 +6,7 @@ import useControlsInternal from "@/hooks/useControlsInternal";
 import React from "react";
 import BooleanControl from "./Controls/BooleanControl";
 import NumberControl from "./Controls/NumberControl";
+import StringControl from "./Controls/StringControl";
 import type { ControlProps } from "./Controls/types";
 
 const CONTROL_REGISTRY = [
@@ -16,6 +17,10 @@ const CONTROL_REGISTRY = [
     {
         guard: (v: ControlPrimitive) => typeof v === "boolean",
         component: BooleanControl,
+    },
+    {
+        guard: (v: ControlPrimitive) => typeof v === "string",
+        component: StringControl,
     },
 ] as const;
 

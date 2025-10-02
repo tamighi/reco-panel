@@ -1,6 +1,6 @@
 import React from "react";
 
-export type ControlPrimitive = number | boolean;
+export type ControlPrimitive = number | boolean | string;
 
 export type BaseControlOption<T extends ControlPrimitive = ControlPrimitive> = {
     value: T;
