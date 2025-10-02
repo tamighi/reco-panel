@@ -1,3 +1,4 @@
+import { useDrag } from "@/hooks/useDrag";
 import React from "react";
 
 export type SliderProps = {
@@ -15,8 +16,9 @@ const Slider: React.FC<SliderProps> = ({
     max = 100,
     step,
 }) => {
-    const [isDragging, setIsDragging] = React.useState(false);
-    const sliderRef = React.useRef<HTMLDivElement>(null);
+    const sliderRef = useDrag({
+        onDrag: (p) => updateValue(p.clientX),
+    });
 
     const percentage = ((value - min) / (max - min)) * 100;
 
@@ -28,6 +30,7 @@ const Slider: React.FC<SliderProps> = ({
             0,
             Math.min(1, (clientX - rect.left) / rect.width),
         );
+
         const rawValue = min + ratio * (max - min);
         const finalValue =
             step !== undefined ? Math.round(rawValue / step) * step : rawValue;
@@ -37,33 +40,8 @@ const Slider: React.FC<SliderProps> = ({
     }, []);
 
     const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
-        setIsDragging(true);
         updateValue(e.clientX);
     }, []);
-
-    const handleMouseMove = React.useCallback(
-        (e: MouseEvent) => {
-            if (isDragging) {
-                updateValue(e.clientX);
-            }
-        },
-        [isDragging],
-    );
-
-    const handleMouseUp = React.useCallback(() => {
-        setIsDragging(false);
-    }, []);
-
-    React.useEffect(() => {
-        if (isDragging) {
-            document.addEventListener("mousemove", handleMouseMove);
-            document.addEventListener("mouseup", handleMouseUp);
-            return () => {
-                document.removeEventListener("mousemove", handleMouseMove);
-                document.removeEventListener("mouseup", handleMouseUp);
-            };
-        }
-    }, [isDragging]);
 
     return (
         <div

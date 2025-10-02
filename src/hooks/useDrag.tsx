@@ -1,6 +1,6 @@
 import React from "react";
 
-type Position = { x: number; y: number };
+type Position = { x: number; y: number; clientX: number; clientY: number };
 
 type UseDragOptions = {
     onDrag?: (p: Position) => void;
@@ -31,14 +31,15 @@ export const useDrag = ({
     const handleMouseMove = React.useCallback(
         (e: MouseEvent) => {
             if (!isDragging) return;
+            const { clientY, clientX } = e;
 
-            const deltaX = e.clientX - startMouse.x;
-            const deltaY = e.clientY - startMouse.y;
+            const deltaX = clientX - startMouse.x;
+            const deltaY = clientY - startMouse.y;
 
-            const newX = lastPosition.x + deltaX;
-            const newY = lastPosition.y + deltaY;
+            const x = lastPosition.x + deltaX;
+            const y = lastPosition.y + deltaY;
 
-            onDrag?.({ x: newX, y: newY });
+            onDrag?.({ x, y, clientX, clientY });
         },
         [isDragging, lastPosition, startMouse],
     );
