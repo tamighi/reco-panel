@@ -2,13 +2,13 @@
 
 @theme {
   /* Colors */
-  --color-elevation-1: #292d39;
-  --color-elevation-2: #181c20;
-  --color-elevation-3: #373c4b;
+  --color-elevation-1: #2a2f34;
+  --color-elevation-2: #1b1f23;
+  --color-elevation-3: #343a40;
 
-  --color-highlight-1: #dce0e4;
+  --color-highlight-1: #e0e4e8;
 
-  --color-primary: #66d4bb;
+  --color-primary: #4db6ac;
 
   /* Sizes */
   --spacing-input: 24px;

@@ -13,12 +13,12 @@ const useControlsInternal = () => {
 
     const setControlValue = React.useCallback(
         (key: string, value: ControlPrimitive) => {
-            setControls((obj) => {
-                obj[key].value = value;
-                return obj;
-            });
+            setControls((obj) => ({
+                ...obj,
+                [key]: { ...obj[key], value },
+            }));
         },
-        [controls, setControls],
+        [setControls],
     );
 
     return { setControls, controls, setControlValue };
