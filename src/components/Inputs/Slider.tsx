@@ -79,7 +79,7 @@ const Slider: React.FC<SliderProps> = ({
                     style={{ width: `${percentage}%` }}
                 />
                 <div
-                    className="absolute top-1/2 -translate-y-1/2 w-3 h-3
+                    className="absolute top-1/2 -translate-1/2 w-3 h-3
                         bg-primary rounded-full cursor-grab
                         active:cursor-grabbing"
                     style={{ left: `${percentage}%` }}

@@ -26,7 +26,7 @@ const NumberControl = ({ control, onChange }: Props) => {
     };
 
     return (
-        <div className="flex gap-2">
+        <div className="flex gap-3">
             {control.min !== undefined && control.max !== undefined ? (
                 <div className="flex-2">
                     <Slider onChange={onInputChange} {...control} />
