@@ -1,21 +1,29 @@
 import useControlsInternal from "@/hooks/useControlsInternal";
 import { useDrag } from "@/hooks/useDrag";
 import Control from "./Control";
-import DragIcon from "./DragIcon";
+import DragIcon from "./Icons/DragIcon";
 import React from "react";
+import CaretDownIcon from "./Icons/CaretDownIcon";
+import CaretUpIcon from "./Icons/CaretUpIcon";
 
 const ControlPanel = () => {
     const { controls } = useControlsInternal();
 
     const [isDragging, setIsDragging] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
 
     const panelRef = React.useRef<HTMLDivElement>(null);
-    const iconRef = useDrag({
+    const dragElRef = useDrag({
         onDrag: (p) =>
             (panelRef.current!.style.transform = `translate(${p.x}px, ${p.y}px)`),
         onDragStart: () => setIsDragging(true),
         onDragEnd: () => setIsDragging(false),
     });
+
+    const IconComponent = React.useMemo(
+        () => (open ? CaretDownIcon : CaretUpIcon),
+        [open],
+    );
 
     return (
         <div
@@ -23,16 +31,25 @@ const ControlPanel = () => {
             className="fixed top-2 right-2 z-[9999] text-root w-rootWidth"
         >
             <div className="flex flex-col rounded-sm bg-elevation-1">
-                <div className="flex justify-center">
-                    <DragIcon
-                        ref={iconRef}
-                        className={
-                            isDragging ? "cursor-grabbing" : "cursor-grab"
-                        }
+                <div className="flex">
+                    <IconComponent
+                        className="cursor-pointer"
+                        onClick={() => setOpen(!open)}
                     />
+                    <div
+                        ref={dragElRef}
+                        className={`flex justify-center flex-1
+                            ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+                    >
+                        <DragIcon />
+                    </div>
+                    <DragIcon className="invisible" />
                 </div>
 
-                <div className="flex flex-col p-2 bg-elevation-2 rounded-sm">
+                <div
+                    className={`flex-col p-2 bg-elevation-2 rounded-sm
+                        ${open ? "flex" : "hidden"}`}
+                >
                     {Object.entries(controls).map(([key, control]) => (
                         <Control key={key} controlKey={key} control={control} />
                     ))}
