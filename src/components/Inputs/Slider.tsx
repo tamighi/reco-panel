@@ -43,15 +43,18 @@ const Slider: React.FC<SliderProps> = ({
         updateValue(e.clientX);
     }, []);
 
+    const handleTouch = React.useCallback((e: React.TouchEvent) => {
+        updateValue(e.touches[0].clientX);
+    }, []);
+
     return (
         <div
             onMouseDown={handleMouseDown}
-            className="cursor-pointer w-full h-5 flex items-center"
+            onTouchStart={handleTouch}
+            ref={sliderRef}
+            className="cursor-pointer w-full flex items-center h-input"
         >
-            <div
-                ref={sliderRef}
-                className="relative w-full h-1 bg-elevation-3 rounded-full"
-            >
+            <div className="relative w-full h-1 bg-elevation-3 rounded-full">
                 <div
                     className="absolute h-full bg-primary rounded-full"
                     style={{ width: `${percentage}%` }}

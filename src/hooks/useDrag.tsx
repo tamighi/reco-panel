@@ -114,12 +114,12 @@ export const useDrag = ({
 
         return () => {
             elementRef.current?.removeEventListener(
-                "touchstart",
-                handleTouchStart,
-            );
-            elementRef.current?.removeEventListener(
                 "mousedown",
                 handleMouseDown,
+            );
+            elementRef.current?.removeEventListener(
+                "touchstart",
+                handleTouchStart,
             );
         };
     }, [elementRef, handleMouseDown, handleTouchStart]);

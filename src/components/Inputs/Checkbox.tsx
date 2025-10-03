@@ -26,7 +26,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         >
             {checked && (
                 <svg
-                    className="w-3 h-3 text-elevation-3"
+                    className="w-4 h-4 text-elevation-3"
                     viewBox="0 0 12 12"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
