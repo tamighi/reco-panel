@@ -17,16 +17,15 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
     return (
         <div
-            className={`w-input h-input rounded flex items-center justify-center
-                border border-transparent focus:border-primary
-                hover:border-primary
+            className={`w-5 h-5 rounded flex items-center justify-center border
+                border-transparent focus:border-primary hover:border-primary
                 ${checked ? "bg-primary" : "bg-elevation-3"}
                 ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
             onClick={handleChange}
         >
             {checked && (
                 <svg
-                    className="w-4 h-4 text-elevation-3"
+                    className="w-3 h-3 text-elevation-3"
                     viewBox="0 0 12 12"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +33,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                     <path
                         d="M10 3L4.5 8.5L2 6"
                         stroke="currentColor"
-                        strokeWidth="2"
+                        strokeWidth="1"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                     />
