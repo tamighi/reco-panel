@@ -53,7 +53,7 @@ const Control = <T extends ControlPrimitive>({
     );
 
     return (
-        <div className="grid grid-cols-[30%_70%] p-1 gap-2 items-center">
+        <div className="grid grid-cols-[3fr_7fr] p-1 gap-2 items-center">
             <span className="text-highlight-1 truncate">{control.label}</span>
             <ControlComponent
                 control={control}

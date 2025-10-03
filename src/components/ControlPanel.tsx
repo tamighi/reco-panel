@@ -20,9 +20,9 @@ const ControlPanel = () => {
     return (
         <div
             ref={panelRef}
-            className="fixed top-2 right-2 z-[9999] w-rootWidth"
+            className="fixed top-2 right-2 z-[9999] text-root w-rootWidth"
         >
-            <div className="flex flex-col text-xs rounded-sm bg-elevation-1">
+            <div className="flex flex-col rounded-sm bg-elevation-1">
                 <div className="flex justify-center">
                     <DragIcon
                         ref={iconRef}

@@ -16,6 +16,14 @@
   --text-root: 12px;
 }
 
+@media (max-width: 640px) {
+  :root {
+    --spacing-input: 18px;
+    --spacing-rootWidth: 210px;
+    --text-root: 9px;
+  }
+}
+
 input[type="number"] {
   -moz-appearance: textfield;
   appearance: textfield;
