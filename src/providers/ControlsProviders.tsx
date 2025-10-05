@@ -4,12 +4,21 @@ import ControlsContext, {
 } from "@/contexts/ControlsContext";
 import React from "react";
 
-const ControlsProvider = ({ children }: { children: React.ReactNode }) => {
+type ControlsProviderOptions = {
+    hidden?: boolean;
+    children?: React.ReactNode;
+};
+
+const ControlsProvider = ({
+    children,
+    ...options
+}: ControlsProviderOptions) => {
+    const { hidden = false } = options;
     const [controls, setControls] = React.useState<ControlsRecord>({});
 
     return (
         <ControlsContext value={{ controls, setControls }}>
-            <ControlPanel />
+            {!hidden && <ControlPanel />}
             {children}
         </ControlsContext>
     );
