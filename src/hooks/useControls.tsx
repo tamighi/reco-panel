@@ -18,10 +18,6 @@ export type UseControlsReturn<T extends ControlInputRecords> = {
     [K in keyof T]: InputValue<T[K]>;
 };
 
-export type UseControlsOptions = {
-    store?: boolean;
-};
-
 const STORAGE_PREFIX = "reco-panel-";
 
 const loadControlsFromStorage = (controls: ControlsRecord) => {
@@ -57,9 +53,8 @@ const normalizeControls = (controls: ControlInputRecords) => {
 
 const useControls = <T extends ControlInputRecords>(
     controlInputs: T,
-    options: UseControlsOptions = {},
 ): UseControlsReturn<T> => {
-    const { store = false } = options;
+    const { store = false } = controlInputs;
 
     const normalizedControlInputs = React.useMemo(() => {
         const controls = normalizeControls(controlInputs);

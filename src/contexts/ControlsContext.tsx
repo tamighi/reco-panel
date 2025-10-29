@@ -5,6 +5,8 @@ export type ControlPrimitive = number | boolean | string;
 export type BaseControlOption<T extends ControlPrimitive = ControlPrimitive> = {
     value: T;
     label?: string;
+    folder?: string;
+    store?: boolean;
 };
 
 export type NumberControlOption = {
