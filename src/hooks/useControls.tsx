@@ -7,18 +7,18 @@ import { isControlType } from "@/utils";
 import React from "react";
 import useControlsInternal from "./useControlsInternal";
 
-type ControlInput = ControlPrimitive | ControlOption<ControlPrimitive>;
+export type ControlInput = ControlPrimitive | ControlOption<ControlPrimitive>;
 
-type ControlInputRecords = { [K: string]: ControlInput };
+export type ControlInputRecords = { [K: string]: ControlInput };
 
-type InputValue<T extends ControlInput> =
+export type InputValue<T extends ControlInput> =
     T extends ControlOption<ControlPrimitive> ? T["value"] : T;
 
-type UseControlsReturn<T extends ControlInputRecords> = {
+export type UseControlsReturn<T extends ControlInputRecords> = {
     [K in keyof T]: InputValue<T[K]>;
 };
 
-type UseControlsOptions = {
+export type UseControlsOptions = {
     store?: boolean;
 };
 
