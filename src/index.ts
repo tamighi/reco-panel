@@ -4,4 +4,4 @@ export { useControls } from "./hooks";
 export { ControlsProviders } from "./providers";
 
 export type { ControlValues } from "./hooks";
-export type { ControlDataRecords } from "./contexts";
+export type { ControlDataRecords, ControlData } from "./contexts";
