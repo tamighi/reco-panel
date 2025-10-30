@@ -1,9 +1,13 @@
 import { STORAGE_PREFIX } from "@/constants";
-import type { ControlData, ControlOptions, ControlsRecord } from "@/contexts";
+import type {
+    ControlData,
+    ControlOptions,
+    ControlDataRecords,
+} from "@/contexts";
 import { isControlType } from "@/utils";
 import type { ControlInputRecords } from "./types";
 
-export const loadControlsFromStorage = (controls: ControlsRecord) => {
+export const loadControlsFromStorage = (controls: ControlDataRecords) => {
     const controlsFromStorage = Object.entries(controls).reduce(
         (acc, [key, control]) => {
             if (!control.store) {
@@ -26,7 +30,7 @@ export const loadControlsFromStorage = (controls: ControlsRecord) => {
 
             return acc;
         },
-        {} as ControlsRecord,
+        {} as ControlDataRecords,
     );
 
     return controlsFromStorage;
@@ -47,5 +51,5 @@ export const normalizeControls = (
         acc[key] = isControlType(value) ? value : { value, label: key };
         fillControlOptions(acc[key], options);
         return acc;
-    }, {} as ControlsRecord);
+    }, {} as ControlDataRecords);
 };

@@ -1,14 +1,14 @@
 import { STORAGE_PREFIX } from "@/constants";
 import { type ControlOptions } from "@/contexts";
 import React from "react";
-import type { ControlInputRecords, UseControlsReturn } from "./types";
+import type { ControlInputRecords, ControlValues } from "./types";
 import useControlsInternal from "./useControlsInternal";
 import { loadControlsFromStorage, normalizeControls } from "./utils";
 
 const useControls = <T extends ControlInputRecords>(
     controlInputs: T,
     options: ControlOptions = {},
-): UseControlsReturn<T> => {
+): ControlValues<T> => {
     const normalizedControlInputs = React.useMemo(() => {
         const controls = normalizeControls(controlInputs, options);
         return loadControlsFromStorage(controls);
@@ -26,7 +26,7 @@ const useControls = <T extends ControlInputRecords>(
                 (acc as any)[key] = controls[key].value;
             }
             return acc;
-        }, {} as UseControlsReturn<T>);
+        }, {} as ControlValues<T>);
     }, [controls]);
 
     React.useEffect(() => {

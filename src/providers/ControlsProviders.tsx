@@ -1,18 +1,17 @@
 import ControlPanel from "@/components/ControlPanel";
-import { ControlsContext, type ControlsRecord } from "@/contexts";
+import { ControlsContext, type ControlDataRecords } from "@/contexts";
 import React from "react";
 
 type ControlsProviderOptions = {
     hidden?: boolean;
-    children?: React.ReactNode;
 };
 
 const ControlsProvider = ({
     children,
     ...options
-}: ControlsProviderOptions) => {
+}: ControlsProviderOptions & { children?: React.ReactNode }) => {
     const { hidden = false } = options;
-    const [controls, setControls] = React.useState<ControlsRecord>({});
+    const [controls, setControls] = React.useState<ControlDataRecords>({});
 
     return (
         <ControlsContext value={{ controls, setControls }}>

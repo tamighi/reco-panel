@@ -5,12 +5,12 @@ export type ControlOptions = {
     store?: boolean;
 };
 
-export type BaseControlData<T extends ControlPrimitive = ControlPrimitive> = {
+type BaseControlData<T extends ControlPrimitive = ControlPrimitive> = {
     value: T;
     label?: string;
 } & ControlOptions;
 
-export type NumberControlData = {
+type NumberControlData = {
     step?: number;
     min?: number;
     max?: number;
@@ -19,9 +19,9 @@ export type NumberControlData = {
 export type ControlData<T extends ControlPrimitive = ControlPrimitive> =
     BaseControlData<T> & (T extends number ? NumberControlData : {});
 
-export type ControlsRecord = { [K: string]: ControlData<ControlPrimitive> };
+export type ControlDataRecords = { [K: string]: ControlData<ControlPrimitive> };
 
 export type ControlsContextType = {
-    controls: ControlsRecord;
-    setControls: React.Dispatch<React.SetStateAction<ControlsRecord>>;
+    controls: ControlDataRecords;
+    setControls: React.Dispatch<React.SetStateAction<ControlDataRecords>>;
 };
