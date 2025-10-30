@@ -1,3 +1,3 @@
 export { default as useControls } from "./useControls";
 export { default as useControlsInternal } from "./useControlsInternal";
-export type { ControlValues } from "./types";
+export type { ControlValues, ControlInputRecords } from "./types";

@@ -21,10 +21,10 @@ type BooleanControlData = BaseControlData<boolean>;
 type StringControlData = BaseControlData<string>;
 
 // prettier-ignore
-export type ControlData<T extends ControlPrimitive = ControlPrimitive> =
+export type ControlData<T extends ControlPrimitive = ControlPrimitive> = 
     T extends number ? NumberControlData : 
     T extends boolean ? BooleanControlData : 
-    T extends string ? StringControlData : 
+    T extends string ? StringControlData :
     never;
 
 export type ControlDataRecords = { [K: string]: ControlData };
