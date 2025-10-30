@@ -1,4 +1,4 @@
-import ControlPanel from "@/components/ControlPanel";
+import { ControlPanel } from "@/components";
 import { ControlsContext, type ControlDataRecords } from "@/contexts";
 import React from "react";
 

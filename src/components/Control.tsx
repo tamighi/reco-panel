@@ -1,10 +1,12 @@
 import type { ControlData, ControlPrimitive } from "@/contexts";
 import { useControlsInternal } from "@/hooks";
 import React from "react";
-import BooleanControl from "./Controls/BooleanControl";
-import NumberControl from "./Controls/NumberControl";
-import StringControl from "./Controls/StringControl";
-import type { ControlProps } from "./Controls/types";
+import {
+    BooleanControl,
+    NumberControl,
+    StringControl,
+    type ControlProps,
+} from "./Controls";
 
 const CONTROL_REGISTRY = [
     {

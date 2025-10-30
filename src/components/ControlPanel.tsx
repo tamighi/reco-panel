@@ -1,9 +1,7 @@
-import { useDrag, useControlsInternal } from "@/hooks";
-import Control from "./Control";
-import DragIcon from "./Icons/DragIcon";
+import { useControlsInternal, useDrag } from "@/hooks";
 import React from "react";
-import CaretDownIcon from "./Icons/CaretDownIcon";
-import CaretUpIcon from "./Icons/CaretUpIcon";
+import Control from "./Control";
+import { CaretDownIcon, CaretUpIcon, DragIcon } from "./Icons";
 
 const ControlPanel = () => {
     const { controls } = useControlsInternal();
