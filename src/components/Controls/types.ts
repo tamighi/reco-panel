@@ -1,9 +1,6 @@
-import type {
-    ControlOption,
-    ControlPrimitive,
-} from "@/contexts/ControlsContext";
+import type { ControlData, ControlPrimitive } from "@/contexts";
 
 export type ControlProps<T extends ControlPrimitive> = {
-    control: ControlOption<T>;
+    control: ControlData<T>;
     onChange?: (v: T) => void;
 };

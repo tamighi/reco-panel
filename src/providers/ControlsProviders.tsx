@@ -1,7 +1,5 @@
 import ControlPanel from "@/components/ControlPanel";
-import ControlsContext, {
-    type ControlsRecord,
-} from "@/contexts/ControlsContext";
+import { ControlsContext, type ControlsRecord } from "@/contexts";
 import React from "react";
 
 type ControlsProviderOptions = {

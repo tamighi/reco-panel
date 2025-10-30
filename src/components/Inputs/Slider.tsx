@@ -1,4 +1,4 @@
-import { useDrag } from "@/hooks/useDrag";
+import { useDrag } from "@/hooks";
 import React from "react";
 
 export type SliderProps = {

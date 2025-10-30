@@ -1,0 +1,51 @@
+import { STORAGE_PREFIX } from "@/constants";
+import type { ControlData, ControlOptions, ControlsRecord } from "@/contexts";
+import { isControlType } from "@/utils";
+import type { ControlInputRecords } from "./types";
+
+export const loadControlsFromStorage = (controls: ControlsRecord) => {
+    const controlsFromStorage = Object.entries(controls).reduce(
+        (acc, [key, control]) => {
+            if (!control.store) {
+                acc[key] = control;
+                return acc;
+            }
+
+            const storedValue = localStorage.getItem(`${STORAGE_PREFIX}${key}`);
+
+            if (storedValue === null) {
+                acc[key] = control;
+                return acc;
+            }
+
+            try {
+                acc[key] = { ...control, value: JSON.parse(storedValue) };
+            } catch {
+                acc[key] = control;
+            }
+
+            return acc;
+        },
+        {} as ControlsRecord,
+    );
+
+    return controlsFromStorage;
+};
+
+const fillControlOptions = (control: ControlData, options: ControlOptions) => {
+    Object.keys(options).forEach((key) => {
+        //@ts-ignore
+        control[key] = control[key] !== undefined ? control[key] : options[key];
+    });
+};
+
+export const normalizeControls = (
+    controls: ControlInputRecords,
+    options: ControlOptions,
+) => {
+    return Object.entries(controls).reduce((acc, [key, value]) => {
+        acc[key] = isControlType(value) ? value : { value, label: key };
+        fillControlOptions(acc[key], options);
+        return acc;
+    }, {} as ControlsRecord);
+};

@@ -1,5 +1,4 @@
-import useControlsInternal from "@/hooks/useControlsInternal";
-import { useDrag } from "@/hooks/useDrag";
+import { useDrag, useControlsInternal } from "@/hooks";
 import Control from "./Control";
 import DragIcon from "./Icons/DragIcon";
 import React from "react";

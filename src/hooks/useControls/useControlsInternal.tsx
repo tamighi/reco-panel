@@ -1,6 +1,4 @@
-import ControlsContext, {
-    type ControlPrimitive,
-} from "@/contexts/ControlsContext";
+import { ControlsContext, type ControlPrimitive } from "@/contexts";
 import React from "react";
 
 const useControlsInternal = () => {

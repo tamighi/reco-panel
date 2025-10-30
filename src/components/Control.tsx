@@ -1,8 +1,5 @@
-import type {
-    ControlOption,
-    ControlPrimitive,
-} from "@/contexts/ControlsContext";
-import useControlsInternal from "@/hooks/useControlsInternal";
+import type { ControlData, ControlPrimitive } from "@/contexts";
+import { useControlsInternal } from "@/hooks";
 import React from "react";
 import BooleanControl from "./Controls/BooleanControl";
 import NumberControl from "./Controls/NumberControl";
@@ -26,7 +23,7 @@ const CONTROL_REGISTRY = [
 
 type Props<T extends ControlPrimitive> = {
     controlKey: string;
-    control: ControlOption<T>;
+    control: ControlData<T>;
 };
 
 type ControlComponent<T extends ControlPrimitive> = React.ComponentType<
