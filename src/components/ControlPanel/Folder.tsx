@@ -18,11 +18,12 @@ const Folder = ({ children, folder }: Props) => {
                 label={folder.name}
             />
 
-            {open && (
-                <div className="ml-1 pl-1 border-l border-l-highlight-1">
-                    {children}
-                </div>
-            )}
+            <div
+                className={`ml-1 pl-1 border-l border-l-highlight-1
+                    ${open ? "" : "hidden"}`}
+            >
+                {children}
+            </div>
         </div>
     );
 };

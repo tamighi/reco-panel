@@ -38,8 +38,14 @@ export const loadControlsFromStorage = (controls: ControlDataRecords) => {
 
 const fillControlOptions = (control: ControlData, options: ControlOptions) => {
     (Object.keys(options) as Array<keyof ControlOptions>).forEach((key) => {
-        //@ts-ignore
-        control[key] = control[key] !== undefined ? control[key] : options[key];
+        if (key === "folder") {
+            control[key] = [options[key], control[key]]
+                .filter(Boolean)
+                .join("/");
+        } else {
+            control[key] =
+                control[key] !== undefined ? control[key] : options[key];
+        }
     });
 };
 
@@ -48,7 +54,9 @@ export const normalizeControls = (
     options: ControlOptions,
 ) => {
     return Object.entries(controls).reduce((acc, [key, value]) => {
-        acc[key] = isControlType(value) ? value : { value, label: key };
+        acc[key] = isControlType(value)
+            ? structuredClone(value)
+            : { value, label: key };
         fillControlOptions(acc[key], options);
         return acc;
     }, {} as ControlDataRecords);
