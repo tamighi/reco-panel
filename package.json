@@ -1,6 +1,6 @@
 {
   "name": "@tamighi/reco-panel",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "main": "dist/reco-panel.js",
   "types": "dist/index.d.ts",
