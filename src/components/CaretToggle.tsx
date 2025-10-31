@@ -6,9 +6,10 @@ type ToggleState = "down" | "up";
 type Props = {
     state?: ToggleState;
     onToggle: (state: ToggleState) => void;
+    label?: string;
 };
 
-const CaretToggle = ({ state = "down", onToggle }: Props) => {
+const CaretToggle = ({ state = "down", onToggle, label }: Props) => {
     const [internalState, setInternalState] = React.useState(state);
 
     React.useEffect(() => {
@@ -26,7 +27,15 @@ const CaretToggle = ({ state = "down", onToggle }: Props) => {
         onToggle(newState);
     }, [internalState]);
 
-    return <IconComponent className="cursor-pointer" onClick={onIconClick} />;
+    return (
+        <div
+            className="flex gap-2 items-center cursor-pointer"
+            onClick={onIconClick}
+        >
+            <IconComponent />;
+            <span className="text-highlight-1 font-bold">{label}</span>
+        </div>
+    );
 };
 
 export default CaretToggle;
