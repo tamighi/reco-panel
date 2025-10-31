@@ -1,5 +1,14 @@
 import type { ControlDataRecords } from "@/contexts";
-import type { NestedControlRecords } from "./types";
+import type { FolderNode, NestedControlRecords } from "./types";
+
+export const isFolderNode = (value: unknown): value is FolderNode => {
+    return (
+        typeof value === "object" &&
+        !!value &&
+        "isFolder" in value &&
+        value.isFolder === true
+    );
+};
 
 export const nestControlsByFolder = (
     controls: ControlDataRecords,
@@ -19,13 +28,14 @@ export const nestControlsByFolder = (
         for (const folderName of folderPath) {
             if (!current[folderName]) {
                 current[folderName] = {
+                    name: folderName,
                     isFolder: true,
                     children: {},
                 };
             }
 
             const node = current[folderName];
-            if ("isFolder" in node && node.isFolder) {
+            if (isFolderNode(node)) {
                 current = node.children;
             }
         }

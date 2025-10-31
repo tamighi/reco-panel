@@ -1,19 +1,21 @@
 import { useControlsInternal } from "@/hooks";
-import Control from "./Control";
+import React from "react";
 import DraggablePanel from "./DraggablePanel";
+import RecursiveFolder from "./RecursiveFolder";
+import { nestControlsByFolder } from "./utils";
 
 const ControlPanel = () => {
     const { controls } = useControlsInternal();
 
-    // const nestedControls = React.useMemo(
-    //     () => nestControlsByFolder(controls),
-    //     [controls],
-    // );
+    const nestedControls = React.useMemo(
+        () => nestControlsByFolder(controls),
+        [controls],
+    );
 
     return (
         <DraggablePanel>
-            {Object.entries(controls).map(([key, control]) => (
-                <Control key={key} controlKey={key} control={control} />
+            {Object.entries(nestedControls).map(([key, control]) => (
+                <RecursiveFolder key={key} nodeKey={key} node={control} />
             ))}
         </DraggablePanel>
     );

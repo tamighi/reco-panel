@@ -1,6 +1,7 @@
 import { useDrag } from "@/hooks";
 import React from "react";
-import { CaretDownIcon, CaretUpIcon, DragIcon } from "../Icons";
+import CaretToggle from "../CaretToggle";
+import { DragIcon } from "../Icons";
 
 type Props = {
     children?: React.ReactNode;
@@ -18,11 +19,6 @@ const DraggablePanel = ({ children }: Props) => {
         onDragEnd: () => setIsDragging(false),
     });
 
-    const IconComponent = React.useMemo(
-        () => (open ? CaretDownIcon : CaretUpIcon),
-        [open],
-    );
-
     return (
         <div
             ref={panelRef}
@@ -30,9 +26,8 @@ const DraggablePanel = ({ children }: Props) => {
         >
             <div className="flex flex-col rounded-sm bg-elevation-1">
                 <div className="flex">
-                    <IconComponent
-                        className="cursor-pointer"
-                        onClick={() => setOpen(!open)}
+                    <CaretToggle
+                        onToggle={(state) => setOpen(state === "down")}
                     />
                     <div
                         ref={dragElRef}
