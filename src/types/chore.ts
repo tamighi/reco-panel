@@ -28,8 +28,3 @@ export type ControlData<T extends ControlPrimitive = ControlPrimitive> =
     never;
 
 export type ControlDataRecords = { [K: string]: ControlData };
-
-export type ControlsContextType = {
-    controls: ControlDataRecords;
-    setControls: React.Dispatch<React.SetStateAction<ControlDataRecords>>;
-};

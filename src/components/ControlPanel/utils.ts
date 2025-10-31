@@ -1,4 +1,4 @@
-import type { ControlDataRecords } from "@/contexts";
+import type { ControlDataRecords } from "@/types/chore";
 import type { FolderNode, NestedControlRecords } from "./types";
 
 export const isFolderNode = (value: unknown): value is FolderNode => {

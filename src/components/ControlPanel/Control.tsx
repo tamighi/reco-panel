@@ -1,5 +1,5 @@
-import type { ControlData, ControlPrimitive } from "@/contexts";
-import { useControlsInternal } from "@/hooks";
+import type { ControlData, ControlPrimitive } from "@/types/chore";
+import { useControlsInternal } from "@/hooks/useControls";
 import React from "react";
 import {
     BooleanControl,
@@ -40,7 +40,7 @@ const getControlComponent = <T extends ControlPrimitive>(
     return control.component as ControlComponent<T>;
 };
 
-const Control = <T extends ControlPrimitive>({
+export const Control = <T extends ControlPrimitive>({
     controlKey,
     control,
 }: Props<T>) => {
@@ -61,5 +61,3 @@ const Control = <T extends ControlPrimitive>({
         </div>
     );
 };
-
-export default Control;

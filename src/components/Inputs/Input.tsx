@@ -1,6 +1,6 @@
 type Props = React.InputHTMLAttributes<HTMLInputElement>;
 
-const Input = (props: Props) => {
+export const Input = (props: Props) => {
     return (
         <input
             {...props}
@@ -10,5 +10,3 @@ const Input = (props: Props) => {
         />
     );
 };
-
-export default Input;

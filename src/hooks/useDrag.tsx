@@ -8,7 +8,11 @@ type UseDragOptions = {
     onDragEnd?: () => void;
 };
 
-const useDrag = ({ onDrag, onDragStart, onDragEnd }: UseDragOptions = {}) => {
+export const useDrag = ({
+    onDrag,
+    onDragStart,
+    onDragEnd,
+}: UseDragOptions = {}) => {
     const elementRef = React.useRef<any>(null);
 
     const [isDragging, setIsDragging] = React.useState(false);
@@ -122,5 +126,3 @@ const useDrag = ({ onDrag, onDragStart, onDragEnd }: UseDragOptions = {}) => {
 
     return elementRef;
 };
-
-export default useDrag;

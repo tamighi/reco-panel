@@ -1,4 +1,4 @@
-import type { ControlData, ControlPrimitive } from "@/contexts";
+import type { ControlData, ControlPrimitive } from "@/types/chore";
 
 type ControlInput = ControlPrimitive | ControlData;
 

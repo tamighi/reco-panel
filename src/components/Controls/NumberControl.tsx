@@ -1,11 +1,10 @@
 import React from "react";
-import Input from "../Inputs/Input";
-import Slider from "../Inputs/Slider";
+import { Input, Slider } from "../Inputs";
 import type { ControlProps } from "./types";
 
 type Props = ControlProps<number>;
 
-const NumberControl = ({ control, onChange }: Props) => {
+export const NumberControl = ({ control, onChange }: Props) => {
     const [value, setValue] = React.useState(control.value);
 
     React.useEffect(() => {
@@ -46,5 +45,3 @@ const NumberControl = ({ control, onChange }: Props) => {
         </div>
     );
 };
-
-export default NumberControl;

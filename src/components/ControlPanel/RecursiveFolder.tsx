@@ -1,15 +1,15 @@
-import type { ControlData } from "@/contexts";
+import type { ControlData } from "@/types/chore";
 import type { FolderNode } from "./types";
 import { isFolderNode } from "./utils";
-import Folder from "./Folder";
-import Control from "./Control";
+import { Folder } from "./Folder";
+import { Control } from "./Control";
 
 type Props = {
     node: FolderNode | ControlData;
     nodeKey: string;
 };
 
-const RecursiveFolder = ({ node, nodeKey }: Props) => {
+export const RecursiveFolder = ({ node, nodeKey }: Props) => {
     return (
         <>
             {isFolderNode(node) ? (
@@ -30,5 +30,3 @@ const RecursiveFolder = ({ node, nodeKey }: Props) => {
         </>
     );
 };
-
-export default RecursiveFolder;

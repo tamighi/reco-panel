@@ -9,7 +9,7 @@ type Props = {
     label?: string;
 };
 
-const CaretToggle = ({ state = "down", onToggle, label }: Props) => {
+export const CaretToggle = ({ state = "down", onToggle, label }: Props) => {
     const [internalState, setInternalState] = React.useState(state);
 
     React.useEffect(() => {
@@ -37,5 +37,3 @@ const CaretToggle = ({ state = "down", onToggle, label }: Props) => {
         </div>
     );
 };
-
-export default CaretToggle;

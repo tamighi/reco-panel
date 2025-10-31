@@ -1,4 +1,4 @@
-import type { ControlData, ControlPrimitive } from "@/contexts";
+import type { ControlData, ControlPrimitive } from "@/types/chore";
 
 export type ControlProps<T extends ControlPrimitive> = {
     control: ControlData<T>;

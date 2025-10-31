@@ -1,11 +1,11 @@
 import { STORAGE_PREFIX } from "@/constants";
 import type {
     ControlData,
-    ControlOptions,
     ControlDataRecords,
-} from "@/contexts";
+    ControlOptions,
+} from "@/types/chore";
+import type { ControlInputRecords } from "@/types/input";
 import { isControlType } from "@/utils";
-import type { ControlInputRecords } from "./types";
 
 export const loadControlsFromStorage = (controls: ControlDataRecords) => {
     const controlsFromStorage = Object.entries(controls).reduce(

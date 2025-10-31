@@ -1,5 +1,5 @@
 import React from "react";
-import CaretToggle from "../CaretToggle";
+import { CaretToggle } from "../CaretToggle";
 import type { FolderNode } from "./types";
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
     folder: FolderNode;
 };
 
-const Folder = ({ children, folder }: Props) => {
+export const Folder = ({ children, folder }: Props) => {
     const [open, setOpen] = React.useState(false);
 
     return (
@@ -27,5 +27,3 @@ const Folder = ({ children, folder }: Props) => {
         </div>
     );
 };
-
-export default Folder;

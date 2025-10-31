@@ -1,10 +1,10 @@
 import React from "react";
-import BaseIcon from "./BaseIcon";
+import { BaseIcon } from "./BaseIcon";
 import type { IconProps } from "./types";
 
 type Props = React.HTMLAttributes<HTMLDivElement> & IconProps;
 
-const CaretUpIcon = React.forwardRef<HTMLDivElement, Props>(
+export const CaretUpIcon = React.forwardRef<HTMLDivElement, Props>(
     ({ size = 20, color = "currentColor", ...props }, ref) => {
         return (
             <BaseIcon ref={ref} {...props}>
@@ -27,5 +27,3 @@ const CaretUpIcon = React.forwardRef<HTMLDivElement, Props>(
         );
     },
 );
-
-export default CaretUpIcon;

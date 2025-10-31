@@ -1,4 +1,4 @@
-import { useDrag } from "@/hooks";
+import { useDrag } from "@/hooks/useDrag";
 import React from "react";
 
 export type SliderProps = {
@@ -9,7 +9,7 @@ export type SliderProps = {
     step?: number;
 };
 
-const Slider: React.FC<SliderProps> = ({
+export const Slider: React.FC<SliderProps> = ({
     value,
     onChange,
     min = 0,
@@ -69,5 +69,3 @@ const Slider: React.FC<SliderProps> = ({
         </div>
     );
 };
-
-export default Slider;

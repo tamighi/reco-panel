@@ -1,6 +1,6 @@
 import "./index.css";
 
-export { useControls } from "./hooks";
-export { ControlsProviders } from "./providers";
+export { useControls } from "./hooks/useControls";
+export { ControlsProvider } from "./providers/ControlsProviders";
 
-export type { ControlValues, ControlInputRecords } from "./hooks";
+export type { ControlValues, ControlInputRecords } from "./types/input";

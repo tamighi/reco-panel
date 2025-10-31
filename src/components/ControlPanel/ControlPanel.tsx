@@ -1,10 +1,10 @@
-import { useControlsInternal } from "@/hooks";
+import { useControlsInternal } from "@/hooks/useControls";
 import React from "react";
-import DraggablePanel from "./DraggablePanel";
-import RecursiveFolder from "./RecursiveFolder";
+import { DraggablePanel } from "./DraggablePanel";
+import { RecursiveFolder } from "./RecursiveFolder";
 import { nestControlsByFolder } from "./utils";
 
-const ControlPanel = () => {
+export const ControlPanel = () => {
     const { controls } = useControlsInternal();
 
     const nestedControls = React.useMemo(
@@ -20,5 +20,3 @@ const ControlPanel = () => {
         </DraggablePanel>
     );
 };
-
-export default ControlPanel;

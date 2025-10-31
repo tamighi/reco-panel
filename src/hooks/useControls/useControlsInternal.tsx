@@ -1,7 +1,8 @@
-import { ControlsContext, type ControlPrimitive } from "@/contexts";
+import { ControlsContext } from "@/contexts/ControlsContext";
+import type { ControlPrimitive } from "@/types/chore";
 import React from "react";
 
-const useControlsInternal = () => {
+export const useControlsInternal = () => {
     const controlsContext = React.useContext(ControlsContext);
     if (!controlsContext) {
         throw new Error("useControls must be used within a ControlsProvider");
@@ -21,5 +22,3 @@ const useControlsInternal = () => {
 
     return { setControls, controls, setControlValue };
 };
-
-export default useControlsInternal;

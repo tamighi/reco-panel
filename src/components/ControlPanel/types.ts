@@ -1,4 +1,4 @@
-import type { ControlData } from "@/contexts";
+import type { ControlData } from "@/types/chore";
 
 export type FolderNode = {
     isFolder: true;

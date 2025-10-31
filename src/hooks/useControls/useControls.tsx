@@ -1,11 +1,11 @@
 import { STORAGE_PREFIX } from "@/constants";
-import { type ControlOptions } from "@/contexts";
+import { type ControlOptions } from "@/types/chore";
 import React from "react";
-import type { ControlInputRecords, ControlValues } from "./types";
-import useControlsInternal from "./useControlsInternal";
+import type { ControlInputRecords, ControlValues } from "@/types/input";
 import { loadControlsFromStorage, normalizeControls } from "./utils";
+import { useControlsInternal } from "./useControlsInternal";
 
-const useControls = <T extends ControlInputRecords>(
+export const useControls = <T extends ControlInputRecords>(
     controlInputs: T,
     options: ControlOptions = {},
 ): ControlValues<T> => {
@@ -42,5 +42,3 @@ const useControls = <T extends ControlInputRecords>(
 
     return settingValues;
 };
-
-export default useControls;

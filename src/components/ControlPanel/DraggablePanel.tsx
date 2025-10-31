@@ -1,13 +1,13 @@
-import { useDrag } from "@/hooks";
+import { useDrag } from "@/hooks/useDrag";
 import React from "react";
-import CaretToggle from "../CaretToggle";
+import { CaretToggle } from "../CaretToggle";
 import { DragIcon } from "../Icons";
 
 type Props = {
     children?: React.ReactNode;
 };
 
-const DraggablePanel = ({ children }: Props) => {
+export const DraggablePanel = ({ children }: Props) => {
     const [isDragging, setIsDragging] = React.useState(false);
     const [open, setOpen] = React.useState(true);
 
@@ -49,5 +49,3 @@ const DraggablePanel = ({ children }: Props) => {
         </div>
     );
 };
-
-export default DraggablePanel;

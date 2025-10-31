@@ -1,12 +1,15 @@
-import { ControlPanel } from "@/components";
-import { ControlsContext, type ControlDataRecords } from "@/contexts";
+import { ControlPanel } from "@/components/ControlPanel";
+import { ControlsContext } from "@/contexts/ControlsContext";
+import type { ControlDataRecords } from "@/types/chore";
+import type { ControlInputRecords } from "@/types/input";
 import React from "react";
 
 type ControlsProviderOptions = {
     hidden?: boolean;
+    controls?: ControlInputRecords;
 };
 
-const ControlsProvider = ({
+export const ControlsProvider = ({
     children,
     ...options
 }: ControlsProviderOptions & { children?: React.ReactNode }) => {
@@ -20,5 +23,3 @@ const ControlsProvider = ({
         </ControlsContext>
     );
 };
-
-export default ControlsProvider;
