@@ -6,7 +6,7 @@ import {
     NumberControl,
     StringControl,
     type ControlProps,
-} from "./Controls";
+} from "../Controls";
 
 const CONTROL_REGISTRY = [
     {

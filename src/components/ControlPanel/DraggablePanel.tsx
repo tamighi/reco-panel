@@ -1,11 +1,12 @@
-import { useControlsInternal, useDrag } from "@/hooks";
+import { useDrag } from "@/hooks";
 import React from "react";
-import Control from "./Control";
-import { CaretDownIcon, CaretUpIcon, DragIcon } from "./Icons";
+import { CaretDownIcon, CaretUpIcon, DragIcon } from "../Icons";
 
-const ControlPanel = () => {
-    const { controls } = useControlsInternal();
+type Props = {
+    children?: React.ReactNode;
+};
 
+const DraggablePanel = ({ children }: Props) => {
     const [isDragging, setIsDragging] = React.useState(false);
     const [open, setOpen] = React.useState(true);
 
@@ -47,13 +48,11 @@ const ControlPanel = () => {
                     className={`flex-col p-2 bg-elevation-2 rounded-sm
                         ${open ? "flex" : "hidden"}`}
                 >
-                    {Object.entries(controls).map(([key, control]) => (
-                        <Control key={key} controlKey={key} control={control} />
-                    ))}
+                    {children}
                 </div>
             </div>
         </div>
     );
 };
 
-export default ControlPanel;
+export default DraggablePanel;

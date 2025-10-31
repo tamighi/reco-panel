@@ -37,7 +37,7 @@ export const loadControlsFromStorage = (controls: ControlDataRecords) => {
 };
 
 const fillControlOptions = (control: ControlData, options: ControlOptions) => {
-    Object.keys(options).forEach((key) => {
+    (Object.keys(options) as Array<keyof ControlOptions>).forEach((key) => {
         //@ts-ignore
         control[key] = control[key] !== undefined ? control[key] : options[key];
     });
