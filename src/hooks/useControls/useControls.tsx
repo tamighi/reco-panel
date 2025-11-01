@@ -18,7 +18,7 @@ export const useControls = <T extends ControlInputRecords>(
 
     React.useEffect(() => {
         setControls((old) => ({ ...normalizedControlInputs, ...old }));
-    }, [normalizedControlInputs]);
+    }, [normalizedControlInputs, setControls]);
 
     const settingValues = React.useMemo(() => {
         return Object.keys(controls).reduce((acc, key) => {
@@ -38,7 +38,7 @@ export const useControls = <T extends ControlInputRecords>(
                 );
             }
         });
-    }, [settingValues]);
+    }, [controls]);
 
     return settingValues;
 };
