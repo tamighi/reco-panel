@@ -1,13 +1,12 @@
 import React from "react";
 import { CaretToggle } from "../CaretToggle";
-import type { FolderNode } from "./types";
 
 type Props = {
     children?: React.ReactNode;
-    folder: FolderNode;
+    label: string;
 };
 
-export const Folder = ({ children, folder }: Props) => {
+export const Folder = ({ children, label }: Props) => {
     const [open, setOpen] = React.useState(false);
 
     return (
@@ -15,7 +14,7 @@ export const Folder = ({ children, folder }: Props) => {
             <CaretToggle
                 state="up"
                 onToggle={(state) => setOpen(state === "down")}
-                label={folder.name}
+                label={label}
             />
 
             <div

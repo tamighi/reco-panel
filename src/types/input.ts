@@ -1,13 +1,5 @@
-import type { ControlData, ControlPrimitive } from "@/types/chore";
+import type { Control, ControlPrimitive } from "./chore";
 
-type ControlInput = ControlPrimitive | ControlData;
+type ControlInput = ControlPrimitive | Control;
 
-export type ControlInputRecords = { [K: string]: ControlInput };
-
-type InputValue<T extends ControlInput> = T extends ControlData
-    ? T["value"]
-    : T;
-
-export type ControlValues<T extends ControlInputRecords> = {
-    [K in keyof T]: InputValue<T[K]>;
-};
+export type ControlInputTree = { [K: string]: ControlInputTree | ControlInput };

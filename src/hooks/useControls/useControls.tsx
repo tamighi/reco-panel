@@ -1,44 +1,40 @@
-import { STORAGE_PREFIX } from "@/constants";
-import { type ControlOptions } from "@/types/chore";
+import type { ResolvedFilteredValueControlTree } from "@/types/filter";
+import type { AppControlPath } from "@/types/path";
+import { deepEqual } from "@/utils";
 import React from "react";
-import type { ControlInputRecords, ControlValues } from "@/types/input";
-import { loadControlsFromStorage, normalizeControls } from "./utils";
 import { useControlsInternal } from "./useControlsInternal";
+import { getControlsByPath, mapControlValues } from "./utils";
 
-export const useControls = <T extends ControlInputRecords>(
-    controlInputs: T,
-    options: ControlOptions = {},
-): ControlValues<T> => {
-    const normalizedControlInputs = React.useMemo(() => {
-        const controls = normalizeControls(controlInputs, options);
-        return loadControlsFromStorage(controls);
-    }, []);
+export const useControls = <const T extends AppControlPath | AppControlPath[]>(
+    path?: T,
+): ResolvedFilteredValueControlTree<T> => {
+    const { controls } = useControlsInternal();
 
-    const { controls, setControls } = useControlsInternal();
+    const controlReturn =
+        React.useRef<ResolvedFilteredValueControlTree<T>>(null);
 
-    React.useEffect(() => {
-        setControls((old) => ({ ...normalizedControlInputs, ...old }));
-    }, [normalizedControlInputs, setControls]);
+    const settingValues = React.useMemo<
+        ResolvedFilteredValueControlTree<T>
+    >(() => {
+        if (!path) return mapControlValues(controls);
 
-    const settingValues = React.useMemo(() => {
-        return Object.keys(controls).reduce((acc, key) => {
-            if (controlInputs[key]) {
-                (acc as any)[key] = controls[key].value;
-            }
-            return acc;
-        }, {} as ControlValues<T>);
-    }, [controls]);
+        const paths: AppControlPath[] = Array.isArray(path) ? path : [path];
+        const results: any = [];
 
-    React.useEffect(() => {
-        Object.entries(controls).forEach(([key, control]) => {
-            if (control.store) {
-                localStorage.setItem(
-                    `${STORAGE_PREFIX}${key}`,
-                    JSON.stringify(control.value),
-                );
-            }
-        });
-    }, [controls]);
+        for (const p of paths) {
+            const filteredControls = getControlsByPath(controls, p);
+            const result = mapControlValues(filteredControls);
+            results.push(result);
+        }
+
+        const newVal = Array.isArray(path) ? results : results[0];
+
+        if (!deepEqual(newVal, controlReturn.current)) {
+            controlReturn.current = newVal;
+        }
+
+        return controlReturn.current as any;
+    }, [controls, path]);
 
     return settingValues;
 };

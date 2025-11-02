@@ -1,9 +1,9 @@
-import type { ControlDataRecords } from "@/types/chore";
+import type { AppControlTree } from "@/types/base";
 import React from "react";
 
 export type ControlsContextType = {
-    controls: ControlDataRecords;
-    setControls: React.Dispatch<React.SetStateAction<ControlDataRecords>>;
+    controls: AppControlTree;
+    setControls: React.Dispatch<React.SetStateAction<AppControlTree>>;
 };
 
 export const ControlsContext = React.createContext<ControlsContextType | null>(

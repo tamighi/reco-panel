@@ -1,5 +1,6 @@
-import type { ControlData, ControlPrimitive } from "@/types/chore";
 import { useControlsInternal } from "@/hooks/useControls";
+import type { Control, ControlPrimitive } from "@/types/chore";
+import type { AppControlPath } from "@/types/path";
 import React from "react";
 import {
     BooleanControl,
@@ -24,8 +25,8 @@ const CONTROL_REGISTRY = [
 ] as const;
 
 type Props<T extends ControlPrimitive> = {
-    controlKey: string;
-    control: ControlData<T>;
+    controlKey: AppControlPath;
+    control: Control<T>;
 };
 
 type ControlComponent<T extends ControlPrimitive> = React.ComponentType<
@@ -40,7 +41,7 @@ const getControlComponent = <T extends ControlPrimitive>(
     return control.component as ControlComponent<T>;
 };
 
-export const Control = <T extends ControlPrimitive>({
+export const ControlInput = <T extends ControlPrimitive>({
     controlKey,
     control,
 }: Props<T>) => {
