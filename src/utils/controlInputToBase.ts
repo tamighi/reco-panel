@@ -25,7 +25,7 @@ const normalizeControl = (
     fillControlOptions(control, options);
 
     if (control.store) {
-        const value = localStorage.getItem(`${STORAGE_PREFIX}_${key}`);
+        const value = localStorage.getItem(`${STORAGE_PREFIX}${key}`);
         if (value) {
             control.value = JSON.parse(value);
         }

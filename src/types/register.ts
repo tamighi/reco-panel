@@ -1,26 +1,7 @@
-import type { ControlInputTree } from "./input";
+export interface Register {}
 
-interface RegisterControlTree {
-    controlTree?: ControlInputTree;
+export type RegisteredControlTree<TRegister = Register> = TRegister extends {
+    controlTree: infer Tree;
 }
-
-// export const testTree = {
-//     path1: {
-//         path2: {
-//             x: { value: 2 },
-//             y: "hello world",
-//             path4: {
-//                 h: true,
-//             },
-//         },
-//         path3: {
-//             z: { value: 17, step: 2 },
-//         },
-//     },
-// } satisfies ControlInputTree;
-
-// export type RegisteredControlTree = NonNullable<typeof testTree>;
-
-export type RegisteredControlTree = NonNullable<
-    RegisterControlTree["controlTree"]
->;
+    ? Tree
+    : any;
