@@ -10,4 +10,4 @@ type ControlPath<T, Depth extends number = 5> =
     : K;
   }[keyof T & string];
 
-export type AppControlPath = ControlPath<AppValueControlTree>;
+export type AppControlPath = ControlPath<AppValueControlTree> | "";

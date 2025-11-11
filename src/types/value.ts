@@ -14,16 +14,4 @@ export type ValueControlTree<T extends TreeOrControl> =
       never;
 }>;
 
-type ValueControlTreeArray<Trees extends TreeOrControl[]> = {
-    [K in keyof Trees]: Trees[K] extends TreeOrControl
-        ? ValueControlTree<Trees[K]>
-        : never;
-};
-
-// prettier-ignore
-export type ResolvedValueControlTree<P extends TreeOrControl | TreeOrControl[]> = 
-    P extends TreeOrControl[] ? ValueControlTreeArray<P> :
-    P extends TreeOrControl ? ValueControlTree<P> :
-    never;
-
 export type AppValueControlTree = ValueControlTree<AppControlTree>;

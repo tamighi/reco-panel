@@ -1,5 +1,6 @@
 import { ControlPanel } from "@/components/ControlPanel";
 import { ControlsContext } from "@/contexts/ControlsContext";
+import { createStore } from "@/store";
 import type { ControlOptions } from "@/types/chore";
 import type { RegisteredControlTree } from "@/types/register";
 import { controlInputTreeToControlTree } from "@/utils/controlInputToBase";
@@ -18,18 +19,16 @@ export const ControlsProvider = ({
     defaultOptions,
     hidden = false,
 }: ControlsProviderOptions) => {
-    const appControlTree = React.useMemo(() => {
+    const initialTree = React.useMemo(() => {
         return controlInputTreeToControlTree(inputControls, defaultOptions);
     }, [inputControls]);
 
-    const [controls, setControls] = React.useState(appControlTree);
-
-    React.useEffect(() => {
-        setControls(appControlTree);
-    }, [appControlTree]);
+    const store = React.useMemo(() => {
+        return createStore(initialTree);
+    }, []);
 
     return (
-        <ControlsContext value={{ controls, setControls }}>
+        <ControlsContext value={store}>
             {!hidden && <ControlPanel />}
             {children}
         </ControlsContext>

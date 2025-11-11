@@ -7,10 +7,11 @@ export const getControlsByPath = <T extends AppControlPath>(
     controls: ControlTree,
     path: T,
 ): FilteredControlTree<T> => {
+    if (path === "") return controls as FilteredControlTree<T>;
+
     const segments = path.split("/");
     let current = controls as any;
     for (const key of segments) {
-        if (!(key in current)) return undefined as any;
         current = current[key];
     }
     return current;

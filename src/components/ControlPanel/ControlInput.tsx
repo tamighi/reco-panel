@@ -1,4 +1,4 @@
-import { useControlsInternal } from "@/hooks/useControls";
+import { useSetControlValue } from "@/hooks/useControls";
 import type { Control, ControlPrimitive } from "@/types/chore";
 import type { AppControlPath } from "@/types/path";
 import React from "react";
@@ -45,7 +45,7 @@ export const ControlInput = <T extends ControlPrimitive>({
     controlKey,
     control,
 }: Props<T>) => {
-    const { setControlValue } = useControlsInternal();
+    const setControlValue = useSetControlValue();
 
     const ControlComponent = React.useMemo(
         () => getControlComponent(control.value),

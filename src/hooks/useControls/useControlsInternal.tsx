@@ -1,43 +1,29 @@
-import { STORAGE_PREFIX } from "@/constants";
-import { ControlsContext } from "@/contexts/ControlsContext";
-import type { ControlTree } from "@/types/base";
-import type { ControlPrimitive } from "@/types/chore";
+import type { FilteredControlTree } from "@/types/filter";
 import type { AppControlPath } from "@/types/path";
 import React from "react";
+import { useControlsSubscribeInternal } from "./useControlsSubscribeInternal";
+import { useControlsContext } from "./useControlsContext";
+import { getControlsByPath } from "./utils";
 
-export const useControlsInternal = () => {
-    const controlsContext = React.useContext(ControlsContext);
-    if (!controlsContext) {
-        throw new Error("useControls must be used within a ControlsProvider");
-    }
+export const useControlsInternal = <const T extends AppControlPath = "">(
+    path: T = "" as T,
+): FilteredControlTree<T> => {
+    const { get } = useControlsContext();
 
-    const { controls, setControls } = controlsContext;
-
-    const setControlValue = React.useCallback(
-        (path: AppControlPath, value: ControlPrimitive) => {
-            setControls((obj) => {
-                const keys = path.split("/");
-
-                let current: ControlTree<any> = obj;
-                for (let i = 0; i < keys.length - 1; i++) {
-                    current = current[keys[i]];
-                }
-
-                const key = keys[keys.length - 1];
-                current[key] = { ...current[key], value };
-
-                if (current[key].store) {
-                    localStorage.setItem(
-                        `${STORAGE_PREFIX}${path}`,
-                        JSON.stringify(value),
-                    );
-                }
-
-                return { ...obj };
-            });
-        },
-        [setControls],
+    const initialFilteredControls = React.useMemo(
+        () => getControlsByPath(get(), path),
+        [],
     );
 
-    return { setControls, controls, setControlValue };
+    const [controls, setControls] = React.useState<FilteredControlTree<T>>(
+        initialFilteredControls,
+    );
+
+    const callback = React.useCallback((tree: FilteredControlTree<T>) => {
+        setControls(tree);
+    }, []);
+
+    useControlsSubscribeInternal(path, callback);
+
+    return controls;
 };

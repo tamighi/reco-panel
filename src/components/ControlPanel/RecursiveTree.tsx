@@ -5,7 +5,7 @@ import { isControlTree } from "@/utils";
 import { ControlInput } from "./ControlInput";
 import { Folder } from "./Folder";
 
-type RecurseControl = ControlTree | Control;
+export type RecurseControl = ControlTree | Control;
 
 type Props<T extends RecurseControl> = {
     node: T;
