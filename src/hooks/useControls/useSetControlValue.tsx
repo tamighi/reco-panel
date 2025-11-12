@@ -13,7 +13,8 @@ export const useSetControlValue = () => {
             notify((obj) => {
                 const keys = path.split("/");
 
-                let current: ControlTree<any> = obj;
+                const newObj = structuredClone(obj);
+                let current: ControlTree<any> = newObj;
                 for (let i = 0; i < keys.length - 1; i++) {
                     current = current[keys[i]];
                 }
@@ -28,7 +29,7 @@ export const useSetControlValue = () => {
                     );
                 }
 
-                return { ...obj };
+                return newObj;
             });
         },
         [notify],
