@@ -1,4 +1,4 @@
-import type { FilteredControlTree } from "@/types/filter";
+import type { ControlLeaf } from "@/types/leaf";
 import type { AppControlPath } from "@/types/path";
 import React from "react";
 import { useControlsContext } from "./useControlsContext";
@@ -7,20 +7,19 @@ import { getControlsByPath } from "./utils";
 
 export const useControls = <const T extends AppControlPath = "">(
     path: T = "" as T,
-): FilteredControlTree<T> => {
+): ControlLeaf<T> => {
     const { get } = useControlsContext();
 
-    const initialFilteredControls = React.useMemo(
+    const initialControls = React.useMemo(
         () => getControlsByPath(get(), path),
         [],
     );
 
-    const [controls, setControls] = React.useState<FilteredControlTree<T>>(
-        initialFilteredControls,
-    );
+    const [controls, setControls] =
+        React.useState<ControlLeaf<T>>(initialControls);
 
-    const callback = React.useCallback((tree: FilteredControlTree<T>) => {
-        setControls(tree);
+    const callback = React.useCallback((newControls: ControlLeaf<T>) => {
+        setControls(newControls);
     }, []);
 
     useControlsSubscription(path, callback);

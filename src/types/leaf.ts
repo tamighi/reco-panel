@@ -1,5 +1,6 @@
 import type { AppControlTree } from "./base";
 import type { AppControlPath } from "./path";
+import type { ValueControlTree } from "./value";
 
 type SplitPath<S extends string> = S extends `${infer Head}/${infer Rest}`
     ? [Head, ...SplitPath<Rest>]
@@ -15,7 +16,11 @@ type NavigatePath<T, Keys extends string[]> = Keys extends [
     : never;
 
 // prettier-ignore
-export type FilteredControlTree<P extends AppControlPath> =
+export type ControlLeaf<P extends AppControlPath> =
     P extends "" ? AppControlTree : 
     P extends AppControlPath ? NavigatePath<AppControlTree, SplitPath<P>> : 
     never;
+
+export type ValueControlLeaf<P extends AppControlPath> = ValueControlTree<
+    ControlLeaf<P>
+>;

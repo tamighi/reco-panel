@@ -1,5 +1,5 @@
 import type { AppControlTree } from "@/types/base";
-import type { FilteredControlTree } from "@/types/filter";
+import type { ControlLeaf } from "@/types/leaf";
 import type { AppControlPath } from "@/types/path";
 import { deepEqual } from "@/utils";
 import React from "react";
@@ -8,21 +8,24 @@ import { getControlsByPath } from "./utils";
 
 export const useControlsSubscription = <const T extends AppControlPath>(
     path: T,
-    callback: (v: FilteredControlTree<T>) => void,
+    callback: (v: ControlLeaf<T>) => void,
 ) => {
     const { subscribe, get } = useControlsContext();
 
-    const prevValue = React.useRef<FilteredControlTree<T>>(
-        getControlsByPath(get(), path),
+    const initialControls = React.useMemo(
+        () => getControlsByPath(get(), path),
+        [],
     );
 
-    const internalCallback = React.useCallback(
-        (controls: AppControlTree) => {
-            const filteredControls = getControlsByPath(controls, path);
+    const cachedValue = React.useRef<ControlLeaf<T>>(initialControls);
 
-            if (!deepEqual(filteredControls, prevValue.current)) {
-                prevValue.current = filteredControls;
-                callback?.(filteredControls);
+    const internalCallback = React.useCallback(
+        (tree: AppControlTree) => {
+            const controls = getControlsByPath(tree, path);
+
+            if (!deepEqual(controls, cachedValue.current)) {
+                cachedValue.current = controls;
+                callback?.(controls);
             }
         },
         [callback],
@@ -32,4 +35,6 @@ export const useControlsSubscription = <const T extends AppControlPath>(
         const unsub = subscribe(internalCallback);
         return unsub;
     }, []);
+
+    return initialControls;
 };
