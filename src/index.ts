@@ -1,5 +1,8 @@
 import "./index.css";
 
-export { useControls } from "./hooks/useControls";
+export {
+    useControlValues as useControls,
+    useControlValuesSubscription as useControlsSubscription,
+} from "./hooks/useControls";
 export { ControlsProvider } from "./providers/ControlsProviders";
 export type { Register } from "./types/register";

@@ -6,7 +6,7 @@ import React from "react";
 import { useControlsContext } from "./useControlsContext";
 import { getControlsByPath } from "./utils";
 
-export const useControlsSubscribeInternal = <const T extends AppControlPath>(
+export const useControlsSubscription = <const T extends AppControlPath>(
     path: T,
     callback: (v: FilteredControlTree<T>) => void,
 ) => {

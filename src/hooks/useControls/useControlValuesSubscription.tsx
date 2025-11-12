@@ -2,10 +2,10 @@ import type { FilteredControlTree } from "@/types/filter";
 import type { AppControlPath } from "@/types/path";
 import type { ValueControlTree } from "@/types/value";
 import React from "react";
-import { useControlsSubscribeInternal } from "./useControlsSubscribeInternal";
+import { useControlsSubscription } from "./useControlsSubscription";
 import { mapControlValues } from "./utils";
 
-export const useControlsSubscribe = <const T extends AppControlPath>(
+export const useControlValuesSubscription = <const T extends AppControlPath>(
     path: T,
     callback: (v: ValueControlTree<FilteredControlTree<T>>) => void,
 ) => {
@@ -17,5 +17,5 @@ export const useControlsSubscribe = <const T extends AppControlPath>(
         [path, callback],
     );
 
-    useControlsSubscribeInternal(path, internalCallback);
+    useControlsSubscription(path, internalCallback);
 };

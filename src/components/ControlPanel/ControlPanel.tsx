@@ -1,10 +1,10 @@
-import { useControlsInternal } from "@/hooks/useControls";
+import { useControls } from "@/hooks/useControls";
 import { DraggablePanel } from "./DraggablePanel";
 import { RecursiveTree, type RecurseControl } from "./RecursiveTree";
 import type { AppControlPath } from "@/types/path";
 
 export const ControlPanel = () => {
-    const controls = useControlsInternal();
+    const controls = useControls();
 
     return (
         <DraggablePanel>
