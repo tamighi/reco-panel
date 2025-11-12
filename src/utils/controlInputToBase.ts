@@ -43,17 +43,16 @@ const recurseInputTreeToAppTree = <T extends ControlInputTree>(
     const result = {} as ControlTree<T>;
 
     for (const [key, value] of Object.entries(controls)) {
-        const k = key as keyof T;
-
         if (isControlInputTree(value)) {
             //@ts-ignore
-            result[k] = controlInputTreeToControlTree(value, options, [
+            result[key] = recurseInputTreeToAppTree(value, options, [
                 ...paths,
-                k,
+                key,
             ]);
         } else {
+            const path = `${paths.join("/")}/${key}`;
             //@ts-ignore
-            result[k] = normalizeControl(value, k, options);
+            result[key] = normalizeControl(value, path, options);
         }
     }
 
