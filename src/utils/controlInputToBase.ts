@@ -19,8 +19,10 @@ const normalizeControl = (
     if (isControlType(value)) {
         control = structuredClone(value);
     } else {
-        control = { value, label: key };
+        control = { value };
     }
+
+    control.label = control.label ?? key.split("/").pop();
 
     fillControlOptions(control, options);
 
