@@ -19,13 +19,17 @@ export const ControlsProvider = ({
     defaultOptions,
     hidden = false,
 }: ControlsProviderOptions) => {
-    const initialTree = React.useMemo(() => {
+    const tree = React.useMemo(() => {
         return controlInputTreeToControlTree(inputControls, defaultOptions);
     }, [inputControls]);
 
     const store = React.useMemo(() => {
-        return createStore(initialTree);
+        return createStore(tree);
     }, []);
+
+    React.useEffect(() => {
+        store.notify(tree);
+    }, [tree]);
 
     return (
         <ControlsContext value={store}>

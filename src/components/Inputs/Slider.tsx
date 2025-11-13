@@ -22,30 +22,41 @@ export const Slider: React.FC<SliderProps> = ({
 
     const percentage = ((value - min) / (max - min)) * 100;
 
-    const updateValue = React.useCallback((clientX: number) => {
-        if (!sliderRef.current || !onChange) return;
+    const updateValue = React.useCallback(
+        (clientX: number) => {
+            if (!sliderRef.current || !onChange) return;
 
-        const rect = sliderRef.current.getBoundingClientRect();
-        const ratio = Math.max(
-            0,
-            Math.min(1, (clientX - rect.left) / rect.width),
-        );
+            const rect = sliderRef.current.getBoundingClientRect();
+            const ratio = Math.max(
+                0,
+                Math.min(1, (clientX - rect.left) / rect.width),
+            );
 
-        const rawValue = min + ratio * (max - min);
-        const finalValue =
-            step !== undefined ? Math.round(rawValue / step) * step : rawValue;
-        const clampedValue = Math.max(min, Math.min(max, finalValue));
+            const rawValue = min + ratio * (max - min);
+            const finalValue =
+                step !== undefined
+                    ? Math.round(rawValue / step) * step
+                    : rawValue;
+            const clampedValue = Math.max(min, Math.min(max, finalValue));
 
-        onChange(clampedValue);
-    }, []);
+            onChange(clampedValue);
+        },
+        [min, max, step, onChange, sliderRef],
+    );
 
-    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
-        updateValue(e.clientX);
-    }, []);
+    const handleMouseDown = React.useCallback(
+        (e: React.MouseEvent) => {
+            updateValue(e.clientX);
+        },
+        [updateValue],
+    );
 
-    const handleTouch = React.useCallback((e: React.TouchEvent) => {
-        updateValue(e.touches[0].clientX);
-    }, []);
+    const handleTouch = React.useCallback(
+        (e: React.TouchEvent) => {
+            updateValue(e.touches[0].clientX);
+        },
+        [updateValue],
+    );
 
     return (
         <div
