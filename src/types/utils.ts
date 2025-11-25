@@ -1,4 +1,6 @@
-export type Unpack<T> = T extends object ? { [K in keyof T]: Unpack<T[K]> } : T;
+export type Prettify<T> = T extends object
+    ? { [K in keyof T]: Prettify<T[K]> }
+    : T;
 
 // prettier-ignore
 export type Dec<N extends number> =
