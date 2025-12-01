@@ -6,10 +6,19 @@ import type {
 } from "@/types/chore";
 import { isControlType } from "@/utils";
 
-type ControlInput = ControlPrimitive | ControlType;
+type ControlInput<T extends ControlPrimitive = ControlPrimitive> =
+    | T
+    | ControlType<T>;
 
-export class Control<T extends ControlInput = ControlInput> {
-    private control!: ControlType;
+export class Control<
+    T extends ControlInput = ControlInput,
+    P extends ControlPrimitive = T extends ControlPrimitive
+        ? T
+        : T extends ControlType<infer I>
+          ? I
+          : never,
+> {
+    private control!: ControlType<P>;
 
     private controlInput: ControlInput;
     private optionsInput: ControlOptions;
@@ -28,7 +37,7 @@ export class Control<T extends ControlInput = ControlInput> {
         });
     }
 
-    public normalizeControl(key: string, folderOptions: ControlOptions) {
+    public normalize(folderOptions: ControlOptions, key: string) {
         const value = this.controlInput;
         const options = { ...folderOptions, ...this.optionsInput };
 
@@ -40,7 +49,7 @@ export class Control<T extends ControlInput = ControlInput> {
             control = { value };
         }
 
-        control.label = control.label ?? key.split("/").pop();
+        control.label = control.label ?? key;
 
         this.fillControlOptions(options);
 

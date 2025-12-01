@@ -1,10 +1,12 @@
 import type { ControlOptions } from "@/types/chore";
 import type { Control } from "./Control";
 
+// TODO: in types (Tree)
 type FolderContent = {
     [K: string]: Folder | Control;
 };
 
+// TODO: in types
 type FolderOptions = ControlOptions & {
     open?: boolean;
 };
@@ -21,15 +23,13 @@ export class Folder {
     // TODO: adapt type
     // TODO: adapt logic
     // TODO: Test
-    public normalize(folderKey: string | null, folderOptions: ControlOptions) {
-        const keyPrefix = folderKey ? `${folderKey}/` : "";
-
+    public normalize(folderOptions: ControlOptions) {
         const normalizedContent = Object.entries(this.content).reduce(
             (res, [key, value]) => {
                 const options = { ...this.options, ...folderOptions };
                 return {
                     ...res,
-                    [key]: value.normalize(`${keyPrefix}${key}`, options),
+                    [key]: value.normalize(options, key),
                 };
             },
             {},
