@@ -1,5 +1,5 @@
 import { useSetControlValue } from "@/hooks/useControls";
-import type { Control, ControlPrimitive } from "@/types/chore";
+import type { ControlType, ControlPrimitive } from "@/types/chore";
 import type { AppControlPath } from "@/types/path";
 import React from "react";
 import {
@@ -26,7 +26,7 @@ const CONTROL_REGISTRY = [
 
 type Props<T extends ControlPrimitive> = {
     controlKey: AppControlPath;
-    control: Control<T>;
+    control: ControlType<T>;
 };
 
 type ControlComponent<T extends ControlPrimitive> = React.ComponentType<

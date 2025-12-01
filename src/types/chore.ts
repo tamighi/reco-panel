@@ -20,7 +20,7 @@ type BooleanControl = BaseControl<boolean>;
 type StringControl = BaseControl<string>;
 
 // prettier-ignore
-export type Control<T extends ControlPrimitive = ControlPrimitive> = 
+export type ControlType<T extends ControlPrimitive = ControlPrimitive> = 
     T extends number ? NumberControl : 
     T extends boolean ? BooleanControl : 
     T extends string ? StringControl :

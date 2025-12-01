@@ -1,21 +1,25 @@
 import { STORAGE_PREFIX } from "@/constants";
 import type { ControlTree } from "@/types/base";
-import type { Control, ControlOptions, ControlPrimitive } from "@/types/chore";
+import type {
+    ControlType,
+    ControlOptions,
+    ControlPrimitive,
+} from "@/types/chore";
 import type { ControlInputTree } from "@/types/input";
 import { isControlInputTree, isControlType } from "./isType";
 
-const fillControlOptions = (control: Control, options: ControlOptions) => {
+const fillControlOptions = (control: ControlType, options: ControlOptions) => {
     (Object.keys(options) as Array<keyof ControlOptions>).forEach((key) => {
         control[key] = control[key] !== undefined ? control[key] : options[key];
     });
 };
 
 const normalizeControl = (
-    value: Control | ControlPrimitive,
+    value: ControlType | ControlPrimitive,
     key: string,
     options: ControlOptions,
 ) => {
-    let control = {} as Control;
+    let control = {} as ControlType;
     if (isControlType(value)) {
         control = structuredClone(value);
     } else {

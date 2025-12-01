@@ -1,12 +1,12 @@
 import type { AppControlTree, ControlTree } from "./base";
-import type { Control } from "./chore";
+import type { ControlType } from "./chore";
 import type { Prettify } from "./utils";
 
-type TreeOrControl = ControlTree | Control;
+type TreeOrControl = ControlTree | ControlType;
 
 // prettier-ignore
 export type ValueControlTree<T extends TreeOrControl> = 
-  T extends Control ? T["value"] 
+  T extends ControlType ? T["value"] 
   : Prettify<{
     [K in keyof T]: 
       T[K] extends { value: infer V } ? V : 
