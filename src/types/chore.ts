@@ -1,27 +1,17 @@
 export type ControlPrimitive = number | boolean | string;
 
-export type ControlOptions = {
+export type BaseControlOptions = {
     store?: boolean;
+    label?: string;
 };
 
-type BaseControl<T extends ControlPrimitive> = {
-    value: T;
-    label?: string;
-} & ControlOptions;
-
-type NumberControl = {
+type NumberControlOptions = {
     step?: number;
     min?: number;
     max?: number;
-} & BaseControl<number>;
-
-type BooleanControl = BaseControl<boolean>;
-
-type StringControl = BaseControl<string>;
+} & BaseControlOptions;
 
 // prettier-ignore
-export type ControlType<T extends ControlPrimitive = ControlPrimitive> = 
-    T extends number ? NumberControl : 
-    T extends boolean ? BooleanControl : 
-    T extends string ? StringControl :
-    never;
+export type ControlOptions<T extends ControlPrimitive = ControlPrimitive> = 
+    T extends number ? NumberControlOptions : 
+    BaseControlOptions;
