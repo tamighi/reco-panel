@@ -1,25 +1,28 @@
 import { STORAGE_PREFIX } from "@/constants";
 import type { ControlTree } from "@/types/base";
 import type {
-    ControlType,
     ControlOptions,
+    BaseControlOptions,
     ControlPrimitive,
 } from "@/types/chore";
 import type { ControlInputTree } from "@/types/input";
 import { isControlInputTree, isControlType } from "./isType";
 
-const fillControlOptions = (control: ControlType, options: ControlOptions) => {
-    (Object.keys(options) as Array<keyof ControlOptions>).forEach((key) => {
+const fillControlOptions = (
+    control: ControlOptions,
+    options: BaseControlOptions,
+) => {
+    (Object.keys(options) as Array<keyof BaseControlOptions>).forEach((key) => {
         control[key] = control[key] !== undefined ? control[key] : options[key];
     });
 };
 
 const normalizeControl = (
-    value: ControlType | ControlPrimitive,
+    value: ControlOptions | ControlPrimitive,
     key: string,
-    options: ControlOptions,
+    options: BaseControlOptions,
 ) => {
-    let control = {} as ControlType;
+    let control = {} as ControlOptions;
     if (isControlType(value)) {
         control = structuredClone(value);
     } else {
@@ -43,7 +46,7 @@ const normalizeControl = (
 // TODO: check ts-ignore
 const recurseInputTreeToAppTree = <T extends ControlInputTree>(
     controls: T,
-    options: ControlOptions = {},
+    options: BaseControlOptions = {},
     paths: string[] = [],
 ): ControlTree<T> => {
     const result = {} as ControlTree<T>;
@@ -67,7 +70,7 @@ const recurseInputTreeToAppTree = <T extends ControlInputTree>(
 
 export const controlInputTreeToControlTree = <T extends ControlInputTree>(
     controls: T,
-    options: ControlOptions = {},
+    options: BaseControlOptions = {},
 ): ControlTree<T> => {
     return recurseInputTreeToAppTree(controls, options);
 };

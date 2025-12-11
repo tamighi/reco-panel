@@ -1,13 +1,13 @@
 import type { ControlTree } from "@/types/base";
-import type { ControlLeaf } from "@/types/leaf";
+import type { AppControlFolder } from "@/types/folder";
 import type { AppControlPath } from "@/types/path";
 import type { ValueControlTree } from "@/types/value";
 
 export const getControlsByPath = <T extends AppControlPath>(
     controls: ControlTree,
     path: T,
-): ControlLeaf<T> => {
-    if (path === "") return controls as ControlLeaf<T>;
+): AppControlFolder<T> => {
+    if (path === "") return controls as AppControlFolder<T>;
 
     const segments = path.split("/");
     let current = controls as any;

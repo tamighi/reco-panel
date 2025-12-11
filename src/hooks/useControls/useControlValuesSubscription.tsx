@@ -1,4 +1,4 @@
-import type { ControlLeaf } from "@/types/leaf";
+import type { AppControlFolder } from "@/types/folder";
 import type { AppControlPath } from "@/types/path";
 import type { ValueControlTree } from "@/types/value";
 import React from "react";
@@ -7,10 +7,10 @@ import { mapControlValues } from "./utils";
 
 export const useControlValuesSubscription = <const T extends AppControlPath>(
     path: T,
-    callback: (v: ValueControlTree<ControlLeaf<T>>) => void,
+    callback: (v: ValueControlTree<AppControlFolder<T>>) => void,
 ) => {
     const internalCallback = React.useCallback(
-        (controls: ControlLeaf<T>) => {
+        (controls: AppControlFolder<T>) => {
             const controlValues = mapControlValues(controls);
             callback(controlValues);
         },

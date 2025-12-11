@@ -1,38 +1,37 @@
-import type { ControlOptions } from "@/types/chore";
-import type { Control } from "./Control";
+import type { ControlFolder, FolderOptions } from "@/types/folder";
 
-// TODO: in types (Tree)
-type FolderContent = {
-    [K: string]: Folder | Control;
-};
-
-// TODO: in types
-type FolderOptions = ControlOptions & {
-    open?: boolean;
-};
-
-export class Folder {
-    private content: FolderContent;
+export class Folder<T extends ControlFolder = ControlFolder> {
     private options: FolderOptions;
+    private content: T;
+    private path!: string;
 
-    constructor(content: FolderContent, options: FolderOptions = {}) {
+    constructor(content: T, options: FolderOptions = {}) {
         this.options = options;
         this.content = content;
     }
 
-    // TODO: adapt type
-    // TODO: adapt logic
-    // TODO: Test
-    public normalize(folderOptions: ControlOptions) {
+    public fillOptions(options: FolderOptions) {
+        this.options = { ...options, ...this.options };
+    }
+
+    public setPath(path: string) {
+        this.path = path;
+    }
+
+    public init(parentOptions: FolderOptions, path: string) {
+        this.fillOptions(parentOptions);
+        this.setPath(path);
+
         const normalizedContent = Object.entries(this.content).reduce(
-            (res, [key, value]) => {
-                const options = { ...this.options, ...folderOptions };
+            (res, [childKey, value]) => {
+                const childPath = `${path}/${childKey}`;
+
                 return {
                     ...res,
-                    [key]: value.normalize(options, key),
+                    [childKey]: value.init(this.options, childPath),
                 };
             },
-            {},
+            {} as T,
         );
 
         this.content = normalizedContent;

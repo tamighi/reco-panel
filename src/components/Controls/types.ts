@@ -1,6 +1,6 @@
-import type { ControlType, ControlPrimitive } from "@/types/chore";
+import type { ControlOptions, ControlPrimitive } from "@/types/chore";
 
 export type ControlProps<T extends ControlPrimitive> = {
-    control: ControlType<T>;
+    control: ControlOptions<T>;
     onChange?: (v: T) => void;
 };

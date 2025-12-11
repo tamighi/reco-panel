@@ -1,15 +1,15 @@
 import { ControlPanel } from "@/components/ControlPanel";
 import { ControlsContext } from "@/contexts/ControlsContext";
 import { createStore } from "@/store";
-import type { ControlOptions } from "@/types/chore";
-import type { RegisteredControlTree } from "@/types/register";
+import type { BaseControlOptions } from "@/types/chore";
+import type { AppControlTree } from "@/types/register";
 import { controlInputTreeToControlTree } from "@/utils/controlInputToBase";
 import React from "react";
 
 type ControlsProviderOptions = {
     hidden?: boolean;
-    controls: RegisteredControlTree;
-    defaultOptions?: ControlOptions;
+    controls: AppControlTree;
+    defaultOptions?: BaseControlOptions;
     children?: React.ReactNode;
 };
 

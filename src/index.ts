@@ -6,4 +6,4 @@ export {
 } from "./hooks/useControls";
 export { ControlsProvider } from "./providers/ControlsProviders";
 export type { Register } from "./types/register";
-export type { ValueControlLeaf } from "./types/leaf";
+export type { ValueControlFolder as ValueControlLeaf } from "./types/folder";

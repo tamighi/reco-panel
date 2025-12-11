@@ -1,7 +1,9 @@
+import type { ControlFolder } from "./folder";
+
 export interface Register {}
 
-export type RegisteredControlTree<TRegister = Register> = TRegister extends {
-    controlTree: infer Tree;
+export type AppControlTree<TRegister = Register> = TRegister extends {
+    controlTree: infer Tree extends ControlFolder;
 }
     ? Tree
-    : any;
+    : never;

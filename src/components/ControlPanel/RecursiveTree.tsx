@@ -1,11 +1,11 @@
 import type { ControlTree } from "@/types/base";
-import type { ControlType } from "@/types/chore";
+import type { ControlOptions } from "@/types/chore";
 import type { AppControlPath } from "@/types/path";
 import { isControlTree } from "@/utils";
 import { ControlInput } from "./ControlInput";
 import { Folder } from "./Folder";
 
-export type RecurseControl = ControlTree | ControlType;
+export type RecurseControl = ControlTree | ControlOptions;
 
 type Props<T extends RecurseControl> = {
     node: T;
